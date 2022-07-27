@@ -3,19 +3,25 @@ import { Container } from "react-bootstrap"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Home from "./pages/Home"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Product from "./pages/Product"
 
 const App = () => {
   return (
     <>
       <Header />
-      <main className="py-3">
-        <Container>
-          <h1>this my e commerce</h1>
-          <Home />
-        </Container>
-      </main>
+      <BrowserRouter>
+        <main className="py-3">
+          <Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<Product />} />
+            </Routes>
+          </Container>
+        </main>
 
-      <Footer />
+        <Footer />
+      </BrowserRouter>
     </>
   )
 }
