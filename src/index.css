@@ -18,3 +18,7 @@ h3 {
   display: block !important;
   width: 100% !important;
 }
+
+.card {
+  cursor: pointer !important;
+}
