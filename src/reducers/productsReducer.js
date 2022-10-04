@@ -4,7 +4,7 @@ import {
   PRODUCTS_REQUEST,
 } from "../constants/productsConstants"
 
-export const productsReducer = (state = { products: [] }, action) => {
+export const productsReducer = (state = { data: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_REQUEST:
       return { loading: true, data: [] }
