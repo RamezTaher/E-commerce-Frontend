@@ -7,9 +7,9 @@ import {
 export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCTS_REQUEST:
-      return { loading: true, products: [] }
+      return { loading: true, data: [] }
     case PRODUCTS_SUCCESS:
-      return { loading: false, products: action.payload }
+      return { loading: false, data: action.payload }
     case PRODUCTS_FAIL:
       return { loading: false, error: action.payload }
     default:
