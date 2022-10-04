@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import { Row, Col } from "react-bootstrap"
 import Product from "../components/Product"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
 import { useDispatch, useSelector } from "react-redux"
 import { products } from "../actions/pruductsActions"
 
@@ -16,9 +18,9 @@ const Home = () => {
     <>
       <h1 className="my-2">The Lastest Products</h1>
       {productsList?.loading ? (
-        <h2>Laoding...</h2>
+        <Loader />
       ) : productsList.error ? (
-        <h3>productsList.error</h3>
+        <Message variant="danger">productsList.error</Message>
       ) : (
         <Row>
           {productsList?.data?.products?.map((product, idx) => (
