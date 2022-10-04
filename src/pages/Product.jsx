@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import { Col, Row, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 import Rating from "../components/Rating"
 import { useDispatch, useSelector } from "react-redux"
 import { product } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
-const Product = () => {
+const Product = ({ history }) => {
   let { id } = useParams()
+  const navigate = useNavigate()
   const [quantity, setQuantity] = useState(0)
   const dispatch = useDispatch()
 
@@ -18,7 +19,9 @@ const Product = () => {
     dispatch(product(id))
   }, [dispatch, id])
 
-  const addToCart = () => {}
+  const addToCart = () => {
+    navigate(`/cart/${id}?quantity=${quantity}`)
+  }
 
   return (
     <>

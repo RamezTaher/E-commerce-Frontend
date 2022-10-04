@@ -8,10 +8,7 @@ const Header = () => {
         <Container>
           <Navbar.Brand href="/">MyShop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse
-            id="basic-navbar-nav"
-            className="d-flex justify-content-end"
-          >
+          <Navbar.Collapse id="basic-navbar-nav align-end">
             <Nav>
               <Nav.Link href="/cart">
                 <i className="fas fa-shopping-cart"></i> Cart
