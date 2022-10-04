@@ -5,6 +5,7 @@ import Message from "../components/Message"
 import Loader from "../components/Loader"
 import { useDispatch, useSelector } from "react-redux"
 import { products } from "../actions/productsActions"
+import { Link } from "react-router-dom"
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -25,7 +26,9 @@ const Home = () => {
         <Row>
           {productsList?.data?.products?.map((product, idx) => (
             <Col key={idx} sm={12} md={6} lg={4} xl={3} className="my-2">
-              <Product product={product} />
+              <Link to={`/products/${product._id}`}>
+                <Product product={product} />
+              </Link>
             </Col>
           ))}
         </Row>
