@@ -10,7 +10,7 @@ const reducer = combineReducers({
   productsList: productsReducer,
   productDetails: productReducer,
   cart: cartReducer,
-  login: loginReducer,
+  userLogin: loginReducer,
 })
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
@@ -23,7 +23,7 @@ const userInfoFromLocalStorage = localStorage.getItem("userInfo")
 
 const initialState = {
   cart: { cartItems: cartItemsFromLocalStorage },
-  user: { userInfo: userInfoFromLocalStorage },
+  userLogin: { userInfo: userInfoFromLocalStorage },
 }
 
 const middleware = [thunk]
