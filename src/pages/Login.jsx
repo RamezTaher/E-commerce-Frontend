@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../actions/authActions"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import FormWrapper from "../components/FormWrapper"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
@@ -11,8 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const location = useLocation()
-  const navigate = useNavigate()
-  const redirect = location.search ? location.search.split("=")[1] : "/"
+  const redirectPath = location.search ? location.search.split("=")[1] : "/"
 
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
@@ -24,9 +23,9 @@ const Login = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      window.location.href = redirectPath
     }
-  }, [navigate, userInfo, redirect])
+  }, [userInfo, redirectPath])
   return (
     <>
       <FormWrapper>
@@ -65,9 +64,9 @@ const Login = () => {
                 New Customer ?{" "}
                 <Link
                   to={
-                    redirect === "/"
+                    redirectPath === "/"
                       ? "/register"
-                      : `/register?redirect=${redirect}`
+                      : `/register?redirect=${redirectPath}`
                   }
                 >
                   {" "}
