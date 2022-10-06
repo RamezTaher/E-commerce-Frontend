@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("")
   const location = useLocation()
   const navigate = useNavigate()
-  const redirect = location.search ? location.search.split("=")[1] : ""
+  const redirect = location.search ? location.search.split("=")[1] : "/"
 
   const dispatch = useDispatch()
   const userLogin = useSelector((state) => state.userLogin)
@@ -37,7 +37,7 @@ const Login = () => {
         ) : (
           <>
             <Form onSubmit={submitHandler}>
-              <Form.Group controlId="email">
+              <Form.Group controlId="email" className="mb-2">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="email"
@@ -46,7 +46,7 @@ const Login = () => {
                   onChange={(e) => setEmail(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-              <Form.Group controlId="password">
+              <Form.Group controlId="password" className="mb-2">
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -64,7 +64,11 @@ const Login = () => {
               <Col>
                 New Customer ?{" "}
                 <Link
-                  to={redirect ? `/register?redirect=${redirect}` : "/register"}
+                  to={
+                    redirect === "/"
+                      ? "/register"
+                      : `/register?redirect=${redirect}`
+                  }
                 >
                   {" "}
                   Register
