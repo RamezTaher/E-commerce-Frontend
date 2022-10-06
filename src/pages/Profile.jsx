@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
 import Message from "../components/Message"
 import { useDispatch, useSelector } from "react-redux"
-import { getProfile } from "../actions/profileActions"
+import { getProfile, updateProfile } from "../actions/profileActions"
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader"
 
@@ -22,12 +22,15 @@ const Profile = () => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
+  const profileUpdate = useSelector((state) => state.profileUpdate)
+  const { success } = profileUpdate
+
   const submitHandler = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       setMessage("Passwords do not match")
     } else {
-      //  dispatch
+      dispatch(updateProfile({ id: user?._id, name, email, password }))
     }
   }
 
@@ -42,15 +45,18 @@ const Profile = () => {
         setEmail(user?.email)
       }
     }
-  }, [dispatch, navigate, user])
+  }, [dispatch, navigate, user, userInfo])
 
   return (
     <>
       <Row>
-        <Col lg={4}>
+        <Col md={4}>
           <h1>My Profile</h1>
           {message && <Message variant={"danger"}>{message}</Message>}
           {error && <Message variant={"danger"}>{error}</Message>}
+          {success && (
+            <Message variant={"success"}>Profile Updated Successfully</Message>
+          )}
           {loading ? (
             <Loader />
           ) : (
@@ -99,7 +105,7 @@ const Profile = () => {
             </Form>
           )}
         </Col>
-        <Col lg={8}>
+        <Col md={8}>
           <h1>Orders</h1>
         </Col>
       </Row>
