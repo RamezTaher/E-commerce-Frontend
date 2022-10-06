@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom"
 import Product from "./pages/Product"
 import Cart from "./pages/Cart"
 import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Container>
           <Routes>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
             <Route path="/products/:id" element={<Product />} />
             <Route path="/cart/:id" element={<Cart />} />
