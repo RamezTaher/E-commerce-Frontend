@@ -12,6 +12,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout())
+    navigate("/")
   }
   const goToProfileHandler = () => {
     navigate("/profile")

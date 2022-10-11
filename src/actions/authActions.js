@@ -89,5 +89,6 @@ export const register = (name, email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userInfo")
+  localStorage.removeItem("shippingAddress")
   dispatch({ type: LOGIN_LOGOUT })
 }
