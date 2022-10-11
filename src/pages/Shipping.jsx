@@ -34,7 +34,7 @@ const Shipping = () => {
             ></Form.Control>
           </Form.Group>
           <Form.Group controlId="zip" className="mb-2">
-            <Form.Label>ZipCode</Form.Label>
+            <Form.Label>Zip Code</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter The Zip Code"
