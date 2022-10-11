@@ -6,5 +6,5 @@ export const saveShippingAddress = (form) => (dispatch, getState) => {
     payload: form,
   })
 
-  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
+  localStorage.setItem("shippingAddress", JSON.stringify(form))
 }
