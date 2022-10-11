@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Form } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap"
 import FormWrapper from "../components/FormWrapper"
 
 const Shipping = () => {
@@ -51,6 +51,7 @@ const Shipping = () => {
               onChange={(e) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
+          <Button type="submit" variant="primary"></Button>
         </Form>
       </FormWrapper>
     </>
