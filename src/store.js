@@ -34,7 +34,7 @@ const shippingAddressFromLocalStorage = localStorage.getItem("shippingAddress")
 const initialState = {
   cart: { cartItems: cartItemsFromLocalStorage },
   userLogin: { userInfo: userInfoFromLocalStorage },
-  shippingAddress: { data: shippingAddressFromLocalStorage },
+  shippingAddress: shippingAddressFromLocalStorage,
 }
 
 const middleware = [thunk]

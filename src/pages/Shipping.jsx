@@ -1,15 +1,26 @@
 import React, { useState } from "react"
 import { Button, Form } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { saveShippingAddress } from "../actions/shippingActions"
 import FormWrapper from "../components/FormWrapper"
 
 const Shipping = () => {
-  const [address, setAddress] = useState("")
-  const [city, setCity] = useState("")
-  const [zipCode, setZipCode] = useState("")
-  const [country, setCountry] = useState("")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const shipping = useSelector((state) => state.shipping)
+  const { shippingAddress } = shipping
+
+  const [address, setAddress] = useState(shippingAddress.address)
+  const [city, setCity] = useState(shippingAddress.city)
+  const [zipCode, setZipCode] = useState(shippingAddress.zipCode)
+  const [country, setCountry] = useState(shippingAddress.country)
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(saveShippingAddress({ address, city, zipCode, country }))
+    navigate("/payement")
   }
   return (
     <>
@@ -53,7 +64,9 @@ const Shipping = () => {
               onChange={(e) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" variant="primary">Continue The Proccess</Button>
+          <Button type="submit" variant="primary">
+            Continue The Proccess
+          </Button>
         </Form>
       </FormWrapper>
     </>

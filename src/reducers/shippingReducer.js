@@ -1,6 +1,6 @@
 import { SHIPPING_SAVE_ADDRESS } from "../constants/shippingsConstants"
 
-export const shippingReducer = (state = {}, action) => {
+export const shippingReducer = (state = {shippingAddress:{}}, action) => {
   switch (action.type) {
     case SHIPPING_SAVE_ADDRESS:
       return {
