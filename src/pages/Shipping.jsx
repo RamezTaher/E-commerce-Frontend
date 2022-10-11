@@ -8,7 +8,9 @@ const Shipping = () => {
   const [zipCode, setZipCode] = useState("")
   const [country, setCountry] = useState("")
 
-  const handleSubmit = () => {}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
   return (
     <>
       <FormWrapper>

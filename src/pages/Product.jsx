@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { product } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
-const Product = ({ history }) => {
+const Product = () => {
   let { id } = useParams()
   const navigate = useNavigate()
   const [quantity, setQuantity] = useState(1)
@@ -33,7 +33,7 @@ const Product = ({ history }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">productsList.error</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Row>
           <Col lg={6}>
@@ -51,7 +51,7 @@ const Product = ({ history }) => {
                 />
               </ListGroup.Item>
               <ListGroup.Item>Price: ${data?.price}</ListGroup.Item>
-              <ListGroup.Item>Description: ${data?.description}</ListGroup.Item>
+              <ListGroup.Item>Description: {data?.description}</ListGroup.Item>
             </ListGroup>
           </Col>
           <Col lg={3}>
