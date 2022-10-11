@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Form } from "react-bootstrap"
-import { FormWrapper } from "../components/FormWrapper"
+import  FormWrapper  from "../components/FormWrapper"
 
 const Shipping = () => {
   const [address, setAddress] = useState("")
