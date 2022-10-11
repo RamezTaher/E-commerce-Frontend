@@ -9,13 +9,12 @@ const Shipping = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const shipping = useSelector((state) => state.shipping)
-  const { shippingAddress } = shipping
+  const shipping = useSelector((state) => state.shippingAddress)
 
-  const [address, setAddress] = useState(shippingAddress.address)
-  const [city, setCity] = useState(shippingAddress.city)
-  const [zipCode, setZipCode] = useState(shippingAddress.zipCode)
-  const [country, setCountry] = useState(shippingAddress.country)
+  const [address, setAddress] = useState(shipping?.address)
+  const [city, setCity] = useState(shipping?.city)
+  const [zipCode, setZipCode] = useState(shipping?.zipCode)
+  const [country, setCountry] = useState(shipping?.country)
 
   const handleSubmit = (e) => {
     e.preventDefault()

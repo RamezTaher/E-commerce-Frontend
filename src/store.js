@@ -16,7 +16,7 @@ const reducer = combineReducers({
   userRegister: registerReducer,
   profile: profileReducer,
   profileUpdate: profileUpdateReducer,
-  shipping: shippingReducer,
+  shippingAddress: shippingReducer,
 })
 
 const cartItemsFromLocalStorage = localStorage.getItem("cartItems")
