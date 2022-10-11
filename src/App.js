@@ -9,6 +9,7 @@ import Cart from "./pages/Cart"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Profile from "./pages/Profile"
+import Shipping from "./pages/Shipping"
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <main className="py-5">
         <Container>
           <Routes>
+            <Route path="/shipping" element={<Shipping />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
