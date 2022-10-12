@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { saveShippingAddress } from "../actions/shippingActions"
 import FormWrapper from "../components/FormWrapper"
+import Steps from "../components/Steps"
 
 const Shipping = () => {
   const navigate = useNavigate()
@@ -24,6 +25,7 @@ const Shipping = () => {
   return (
     <>
       <FormWrapper>
+        <Steps step1 step2></Steps>
         <h1>Shipping</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="address" className="mb-2">
