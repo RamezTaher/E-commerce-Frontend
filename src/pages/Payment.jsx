@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Button, Col, Form } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { saveShippingAddress } from "../actions/shippingActions"
+import { savePaymentMethod } from "../actions/paymentActions"
 import FormWrapper from "../components/FormWrapper"
 import Steps from "../components/Steps"
 
@@ -19,6 +19,7 @@ const Payment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    dispatch(savePaymentMethod(paymentMethod))
     navigate("/order")
   }
   return (

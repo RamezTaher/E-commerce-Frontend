@@ -1,11 +1,11 @@
 import { PAYMENT_SAVE_METHOD } from "../constants/paymentConstants"
 
-export const paymentReducer = (state = {}, action) => {
+export const paymentReducer = (state = { payementMethod: "" }, action) => {
   switch (action.type) {
     case PAYMENT_SAVE_METHOD:
       return {
         ...state,
-        ...action.payload,
+        payementMethod: action.payload,
       }
 
     default:
