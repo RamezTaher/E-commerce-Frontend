@@ -28,28 +28,28 @@ const Payment = () => {
         <h1>Payment</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
-            <Form.Label as={"h4"}>Select Payment Method</Form.Label>
+            <Form.Label as={"legend"}>Select Payment Method</Form.Label>
+            <Col className="d-flex flex-column gap-2 py-4">
+              <Form.Check
+                type="radio"
+                label="Paypal or Credit Card"
+                id="PayPal"
+                name="paymentMethod"
+                value="PayPal"
+                checked={paymentMethod === "PayPal"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></Form.Check>
+              <Form.Check
+                type="radio"
+                label="Stripe"
+                id="Stripe"
+                name="paymentMethod"
+                value="Stripe"
+                checked={paymentMethod === "Stripe"}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              ></Form.Check>
+            </Col>
           </Form.Group>
-          <Col className="d-flex flex-column gap-2 py-4">
-            <Form.Check
-              type="radio"
-              label="Paypal or Credit Card"
-              id="PayPal"
-              name="paymentMethod"
-              value="PayPal"
-              checked={paymentMethod === "PayPal"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
-            <Form.Check
-              type="radio"
-              label="Stripe"
-              id="Stripe"
-              name="paymentMethod"
-              value="Stripe"
-              checked={paymentMethod === "Stripe"}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check>
-          </Col>
           <Button type="submit" variant="primary">
             Continue The Proccess
           </Button>
