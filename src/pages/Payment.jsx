@@ -15,7 +15,11 @@ const Payment = () => {
     navigate("/shipping")
   }
 
-  const [paymentMethod, setPaymentMethod] = useState("PayPal")
+  const payment = useSelector((state) => state.payment)
+
+  const [paymentMethod, setPaymentMethod] = useState(payment)
+
+  console.log(payment.paymentMethod)
 
   const handleSubmit = (e) => {
     e.preventDefault()
