@@ -20,7 +20,7 @@ const Shipping = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(saveShippingAddress({ address, city, zipCode, country }))
-    navigate("/payement")
+    navigate("/payment")
   }
   return (
     <>

@@ -6,7 +6,7 @@ import { saveShippingAddress } from "../actions/shippingActions"
 import FormWrapper from "../components/FormWrapper"
 import Steps from "../components/Steps"
 
-const Payement = () => {
+const Payment = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -15,7 +15,7 @@ const Payement = () => {
     navigate("/shipping")
   }
 
-  const [payementMethod, setPayementMethod] = useState("PayPal")
+  const [paymentMethod, setPaymentMethod] = useState("PayPal")
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -28,17 +28,17 @@ const Payement = () => {
         <h1>Payment</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
-            <Form.Label as={"legend"}>Select Payment Method</Form.Label>
+            <Form.Label as={"h4"}>Select Payment Method</Form.Label>
           </Form.Group>
-          <Col>
+          <Col className="d-flex flex-column gap-2 py-4">
             <Form.Check
               type="radio"
               label="Paypal or Credit Card"
               id="PayPal"
               name="paymentMethod"
               value="PayPal"
-              checked={payementMethod === "PayPal"}
-              onChange={(e) => setPayementMethod(e.target.value)}
+              checked={paymentMethod === "PayPal"}
+              onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
             <Form.Check
               type="radio"
@@ -46,8 +46,8 @@ const Payement = () => {
               id="Stripe"
               name="paymentMethod"
               value="Stripe"
-              checked={payementMethod === "Stripe"}
-              onChange={(e) => setPayementMethod(e.target.value)}
+              checked={paymentMethod === "Stripe"}
+              onChange={(e) => setPaymentMethod(e.target.value)}
             ></Form.Check>
           </Col>
           <Button type="submit" variant="primary">
@@ -59,4 +59,4 @@ const Payement = () => {
   )
 }
 
-export default Payement
+export default Payment
