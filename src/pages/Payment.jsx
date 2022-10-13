@@ -19,7 +19,6 @@ const Payment = () => {
 
   const [paymentMethod, setPaymentMethod] = useState(payment)
 
-  console.log(payment.paymentMethod)
 
   const handleSubmit = (e) => {
     e.preventDefault()
