@@ -67,7 +67,7 @@ const Shipping = () => {
             ></Form.Control>
           </Form.Group>
           <Button type="submit" variant="primary">
-            Continue The Proccess
+            Continue
           </Button>
         </Form>
       </FormWrapper>
