@@ -1,15 +1,15 @@
 import axios from "axios"
 import { API_URL } from "../../constants/api"
 import {
-  POST_ORDERS_SUCCESS,
-  POST_ORDERS_REQUEST,
-  POST_ORDERS_FAIL,
+  POST_ORDER_SUCCESS,
+  POST_ORDER_REQUEST,
+  POST_ORDER_FAIL,
 } from "../../constants/orderConstants"
 
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: POST_ORDERS_REQUEST,
+      type: POST_ORDER_REQUEST,
     })
 
     const {
@@ -26,12 +26,12 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const { data } = await axios.post(`${API_URL}/api/orders`, order, config)
 
     dispatch({
-      type: POST_ORDERS_SUCCESS,
+      type: POST_ORDER_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: POST_ORDERS_FAIL,
+      type: POST_ORDER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
