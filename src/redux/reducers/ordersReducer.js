@@ -4,7 +4,7 @@ import {
   ORDERS_FAIL,
 } from "../../constants/orderConstants"
 
-export const orderReducer = (state = {}, action) => {
+export const ordersReducer = (state = {}, action) => {
   switch (action.type) {
     case ORDERS_REQUEST:
       return {
