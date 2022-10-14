@@ -27,6 +27,8 @@ const Orders = () => {
   const handleOrder = (e) => {
     e.preventDefault()
   }
+
+  const removeWhiteSpaces = (text) => text.trim()
   return (
     <>
       <Steps step1 step2 step3 step4 />
@@ -36,8 +38,10 @@ const Orders = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                Address: {shipping.address},{shipping.city},{shipping.zipCode}{" "}
-                {shipping.country}
+                Address: {removeWhiteSpaces(shipping.address)},
+                {removeWhiteSpaces(shipping.city)},{" "}
+                {removeWhiteSpaces(shipping.zipCode)},{" "}
+                {removeWhiteSpaces(shipping.country)}
               </p>
             </ListGroup.Item>
 
