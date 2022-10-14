@@ -1,83 +1,60 @@
 import React, { useEffect } from "react"
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom"
+import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Steps from "../components/Steps"
-import { createOrder } from "../redux/actions/ordersActions"
+import { getOrder } from "../redux/actions/ordersActions"
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces"
 
 const Order = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const shipping = useSelector((state) => state.shippingAddress)
-  const payment = useSelector((state) => state.payment)
-  const cart = useSelector((state) => state.cart)
-  const postOrder = useSelector((state) => state.createOrder)
-  const { data, success, error } = postOrder
+  let { id } = useParams()
 
-  cart.cartItems.totalPrice = cart.cartItems.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  )
+  const getOrderData = useSelector((state) => state.getOrder)
 
-  cart.cartItems.shippingPrice = cart.cartItems.totalPrice > 200 ? 0 : 200
-  cart.cartItems.tax = +(0.1 * cart.cartItems.totalPrice).toFixed(2)
-  cart.cartItems.sum = +(
-    cart.cartItems.totalPrice +
-    cart.cartItems.shippingPrice +
-    cart.cartItems.tax
-  ).toFixed(2)
-
-  const handleOrder = (e) => {
-    e.preventDefault()
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        shippingAddress: shipping,
-        paymentMethod: payment.payementMethod,
-        itemsPrice: cart.cartItems.totalPrice,
-        shippingPrice: cart.cartItems.shippingPrice,
-        taxPrice: cart.cartItems.tax,
-        totalPrice: cart.cartItems.sum,
-      })
-    )
-  }
+  const { data, loading, error } = getOrderData
 
   useEffect(() => {
-    if (success) {
-      navigate(`/orders/${data._id}`)
-    }
-  }, [navigate, success, data])
+    dispatch(getOrder())
+  }, [])
 
-  return (
+  return loading ? (
+    <Loader />
+  ) : error ? (
+    <Message variant={"danger"}>{error}</Message>
+  ) : (
     <>
-      <Steps step1 step2 step3 step4 />
+      <h1>Order {data._id}</h1>
       <Row>
         <Col md={8}>
           <ListGroup variant="flush">
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                Address: {removeWhiteSpaces(shipping.address)},{" "}
-                {removeWhiteSpaces(shipping.city)},{" "}
-                {removeWhiteSpaces(shipping.zipCode)},{" "}
-                {removeWhiteSpaces(shipping.country)}
+                Address:{" "}
+                {removeWhiteSpaces(data.shippingshippingAddress.address)},{" "}
+                {removeWhiteSpaces(data.shippingAddress.city)},{" "}
+                {removeWhiteSpaces(data.shippingAddress.zipCode)},{" "}
+                {removeWhiteSpaces(data.shippingAddress.country)}
               </p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Payment</h2>
-              <p>Method: {payment.payementMethod}</p>
+              <p>Method: {data.payementMethod}</p>
             </ListGroup.Item>
 
             <ListGroup.Item>
               <h2>Orders</h2>
-              {cart.cartItems.length === 0 ? (
-                <Message>Add Items to your Cart</Message>
+              {data.orderItems.length === 0 ? (
+                <Message>Empty Order</Message>
               ) : (
                 <ListGroup variant="flush">
-                  {cart.cartItems.map((item, idx) => (
+                  {data.orderItems.map((item, idx) => (
                     <ListGroup.Item key={idx}>
                       <Row>
                         <Col md={2}>
@@ -114,39 +91,29 @@ const Order = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${cart.cartItems.totalPrice.toFixed(2)}</Col>
+                  <Col>${data.orderItems.totalPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${cart.cartItems.shippingPrice}</Col>
+                  <Col>${data.orderItems.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${cart.cartItems.tax}</Col>
+                  <Col>${data.orderItems.tax}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${cart.cartItems.sum}</Col>
+                  <Col>${data.orderItems.sum}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 {error && <Message variant={"danger"}>{error}</Message>}
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Button
-                  type="button"
-                  className="btn-block"
-                  disabled={cart.cartItems.length === 0}
-                  onClick={handleOrder}
-                >
-                  Place Your Order
-                </Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
