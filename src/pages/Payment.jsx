@@ -17,8 +17,9 @@ const Payment = () => {
 
   const payment = useSelector((state) => state.payment)
 
-  const [paymentMethod, setPaymentMethod] = useState(payment)
+  const [paymentMethod, setPaymentMethod] = useState(payment.payementMethod)
 
+  console.log(payment)
 
   const handleSubmit = (e) => {
     e.preventDefault()

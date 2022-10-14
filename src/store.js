@@ -40,7 +40,7 @@ const initialState = {
   cart: { cartItems: cartItemsFromLocalStorage },
   userLogin: { userInfo: userInfoFromLocalStorage },
   shippingAddress: shippingAddressFromLocalStorage,
-  payment: paymentMethodFromLocalStorage,
+  payment: { payementMethod: paymentMethodFromLocalStorage },
 }
 
 const middleware = [thunk]
