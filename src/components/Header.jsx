@@ -2,13 +2,13 @@ import React from "react"
 import { Nav, Navbar, Container, NavDropdown } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { logout } from "../actions/authActions"
+import { logout } from "../redux/actions/authActions"
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const userLogin = useSelector((state) => state.userLogin)
-  const { loading, error, userInfo } = userLogin
+  const { loading, userInfo } = userLogin
 
   const logoutHandler = () => {
     dispatch(logout())
