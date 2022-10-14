@@ -14,7 +14,7 @@ const Orders = () => {
   const payment = useSelector((state) => state.payment)
   const cart = useSelector((state) => state.cart)
   const orders = useSelector((state) => state.orders)
-  const { order, success, error } = orders
+  const { data, success, error } = orders
 
   cart.cartItems.totalPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -46,9 +46,9 @@ const Orders = () => {
 
   useEffect(() => {
     if (success) {
-      navigate(`/orders/${order._id}`)
+      navigate(`/orders/${data._id}`)
     }
-  }, [navigate, success, order])
+  }, [navigate, success, data])
 
   return (
     <>
