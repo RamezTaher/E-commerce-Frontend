@@ -1,4 +1,4 @@
-import { PAYMENT_SAVE_METHOD } from "../constants/paymentConstants"
+import { PAYMENT_SAVE_METHOD } from "../../constants/paymentConstants"
 
 export const savePaymentMethod = (method) => (dispatch) => {
   dispatch({

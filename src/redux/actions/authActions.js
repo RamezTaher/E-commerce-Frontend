@@ -1,5 +1,5 @@
 import axios from "axios"
-import { API_URL } from "../constants/api"
+import { API_URL } from "../../constants/api"
 import {
   LOGIN_FAIL,
   LOGIN_LOGOUT,
@@ -8,7 +8,7 @@ import {
   REGISTER_FAIL,
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
-} from "../constants/authConstants"
+} from "../../constants/authConstants"
 
 export const login = (email, password) => async (dispatch) => {
   try {

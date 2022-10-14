@@ -5,7 +5,7 @@ import {
   PROFILE_UPDATE_FAIL,
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_SUCCESS,
-} from "../constants/profileConstants"
+} from "../../constants/profileConstants"
 
 export const profileReducer = (state = { user: {} }, action) => {
   switch (action.type) {

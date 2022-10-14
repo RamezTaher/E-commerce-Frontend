@@ -3,9 +3,9 @@ import {
   PRODUCTS_FAIL,
   PRODUCTS_SUCCESS,
   PRODUCTS_REQUEST,
-} from "../constants/productsConstants"
+} from "../../constants/productsConstants"
 
-import { API_URL } from "../constants/api"
+import { API_URL } from "../../constants/api"
 
 export const products = () => async (dispatch) => {
   try {

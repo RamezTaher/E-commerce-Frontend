@@ -2,7 +2,7 @@ import {
   PRODUCT_FAIL,
   PRODUCT_SUCCESS,
   PRODUCT_REQUEST,
-} from "../constants/productConstants"
+} from "../../constants/productConstants"
 
 export const productReducer = (
   state = { product: { reviews: [] } },
