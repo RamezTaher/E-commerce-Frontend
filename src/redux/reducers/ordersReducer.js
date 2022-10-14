@@ -2,9 +2,12 @@ import {
   POST_ORDER_FAIL,
   POST_ORDER_REQUEST,
   POST_ORDER_SUCCESS,
+  GET_ORDER_FAIL,
+  GET_ORDER_REQUEST,
+  GET_ORDER_SUCCESS,
 } from "../../constants/orderConstants"
 
-export const ordersReducer = (state = {}, action) => {
+export const createOrderReducer = (state = {}, action) => {
   switch (action.type) {
     case POST_ORDER_REQUEST:
       return {
@@ -21,7 +24,6 @@ export const ordersReducer = (state = {}, action) => {
         loading: false,
         error: action.payload,
       }
-
     default:
       return state
   }
