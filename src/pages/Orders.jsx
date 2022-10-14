@@ -23,7 +23,7 @@ const Orders = () => {
 
   cart.cartItems.shippingPrice = cart.cartItems.totalPrice > 200 ? 0 : 200
   cart.cartItems.tax = +(0.1 * cart.cartItems.totalPrice).toFixed(2)
-  cart.cartItems.sum = (
+  cart.cartItems.sum = +(
     cart.cartItems.totalPrice +
     cart.cartItems.shippingPrice +
     cart.cartItems.tax
