@@ -1,3 +1,3 @@
-export const ORDER_REQUEST = "ORDER_REQUEST"
-export const ORDER_SUCCESS = "ORDER_SUCCESS"
-export const ORDER_FAIL = "ORDER_FAIL"
+export const ORDERS_REQUEST = "ORDERS_REQUEST"
+export const ORDERS_SUCCESS = "ORDERS_SUCCESS"
+export const ORDERS_FAIL = "ORDERS_FAIL"
