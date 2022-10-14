@@ -6,8 +6,8 @@ import {
   PROFILE_UPDATE_FAIL,
   PROFILE_UPDATE_REQUEST,
   PROFILE_UPDATE_SUCCESS,
-} from "../constants/profileConstants"
-import { API_URL } from "../constants/api"
+} from "../../constants/profileConstants"
+import { API_URL } from "../../constants/api"
 
 export const getProfile = (id) => async (dispatch, getState) => {
   try {
