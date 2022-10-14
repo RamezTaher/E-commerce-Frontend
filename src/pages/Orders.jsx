@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import Message from "../components/Message"
 import Steps from "../components/Steps"
+import { removeWhiteSpaces } from "../utils/removeWhiteSpaces"
 
 const Orders = () => {
   const dispatch = useDispatch()
@@ -28,7 +29,6 @@ const Orders = () => {
     e.preventDefault()
   }
 
-  const removeWhiteSpaces = (text) => text.trim()
   return (
     <>
       <Steps step1 step2 step3 step4 />
@@ -38,7 +38,7 @@ const Orders = () => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
-                Address: {removeWhiteSpaces(shipping.address)},
+                Address: {removeWhiteSpaces(shipping.address)},{" "}
                 {removeWhiteSpaces(shipping.city)},{" "}
                 {removeWhiteSpaces(shipping.zipCode)},{" "}
                 {removeWhiteSpaces(shipping.country)}
