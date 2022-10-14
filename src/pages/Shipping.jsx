@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Button, Form } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { saveShippingAddress } from "../actions/shippingActions"
+import { saveShippingAddress } from "../redux/actions/shippingActions"
 import FormWrapper from "../components/FormWrapper"
 import Steps from "../components/Steps"
 

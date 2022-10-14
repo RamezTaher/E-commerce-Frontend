@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import { Col, Row, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 import Rating from "../components/Rating"
 import { useDispatch, useSelector } from "react-redux"
-import { product } from "../actions/productActions"
+import { product } from "../redux/actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 const Product = () => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Button, Col, Form, Row } from "react-bootstrap"
 import Message from "../components/Message"
 import { useDispatch, useSelector } from "react-redux"
-import { getProfile, updateProfile } from "../actions/profileActions"
+import { getProfile, updateProfile } from "../redux/actions/profileActions"
 import { useNavigate } from "react-router-dom"
 import Loader from "../components/Loader"
 
