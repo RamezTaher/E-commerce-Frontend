@@ -47,6 +47,16 @@ const Shipping = () => {
               onChange={(e) => setCity(e.target.value)}
             ></Form.Control>
           </Form.Group>
+
+          <Form.Group controlId="contry" className="mb-2">
+            <Form.Label>Country</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
           <Form.Group controlId="zip" className="mb-2">
             <Form.Label>Zip Code</Form.Label>
             <Form.Control
@@ -54,15 +64,6 @@ const Shipping = () => {
               placeholder="Enter The Zip Code"
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-          <Form.Group controlId="zip" className="mb-2">
-            <Form.Label>Country</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Country"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Button type="submit" variant="primary">
