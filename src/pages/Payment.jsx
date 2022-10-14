@@ -24,12 +24,12 @@ const Payment = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(savePaymentMethod(paymentMethod))
-    navigate("/order")
+    navigate("/orders")
   }
   return (
     <>
       <FormWrapper>
-        <Steps step1 step2 step3></Steps>
+        <Steps step1 step2 step3 />
         <h1>Payment</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-2">
