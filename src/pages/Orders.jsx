@@ -1,16 +1,20 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Message from "../components/Message"
 import Steps from "../components/Steps"
+import { createOrder } from "../redux/actions/ordersActions"
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces"
 
 const Orders = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const shipping = useSelector((state) => state.shippingAddress)
   const payment = useSelector((state) => state.payment)
   const cart = useSelector((state) => state.cart)
+  const orders = useSelector((state) => state.orders)
+  const { order, success, error } = orders
 
   cart.cartItems.totalPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -27,7 +31,23 @@ const Orders = () => {
 
   const handleOrder = (e) => {
     e.preventDefault()
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: shipping.address,
+        payment: payment.payementMethod,
+        itemsPrice: cart.cartItems.totalPrice,
+        shippingPrice: cart.cartItems.shippingPrice,
+        tax: cart.cartItems.tax,
+      })
+    )
   }
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/orders/${order._id}`)
+    }
+  }, [navigate, success, order])
 
   return (
     <>
@@ -113,6 +133,9 @@ const Orders = () => {
                   <Col>Total</Col>
                   <Col>${cart.cartItems.sum}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant={"danger"}>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
