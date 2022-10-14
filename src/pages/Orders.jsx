@@ -13,8 +13,8 @@ const Orders = () => {
   const shipping = useSelector((state) => state.shippingAddress)
   const payment = useSelector((state) => state.payment)
   const cart = useSelector((state) => state.cart)
-  const orders = useSelector((state) => state.orders)
-  const { data, success, error } = orders
+  const postOrder = useSelector((state) => state.createOrder)
+  const { data, success, error } = postOrder
 
   cart.cartItems.totalPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
