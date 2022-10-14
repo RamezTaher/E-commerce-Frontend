@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Row, Col, ListGroup, Image, Form, Button, Card } from "react-bootstrap"
 import Message from "../components/Message"
-import { addToCart, removeFromCart } from "../actions/cartActions"
+import { addToCart, removeFromCart } from "../redux/actions/cartActions"
 import { useParams, useLocation } from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom"
 

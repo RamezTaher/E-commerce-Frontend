@@ -4,7 +4,7 @@ import Product from "../components/Product"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
 import { useDispatch, useSelector } from "react-redux"
-import { products } from "../actions/productsActions"
+import { products } from "../redux/actions/productsActions"
 import { Link } from "react-router-dom"
 
 const Home = () => {
