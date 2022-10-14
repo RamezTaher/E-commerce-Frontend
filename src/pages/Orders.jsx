@@ -34,11 +34,12 @@ const Orders = () => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
-        shippingAddress: shipping.address,
-        payment: payment.payementMethod,
+        shippingAddress: shipping,
+        paymentMethod: payment.payementMethod,
         itemsPrice: cart.cartItems.totalPrice,
         shippingPrice: cart.cartItems.shippingPrice,
-        tax: cart.cartItems.tax,
+        taxPrice: cart.cartItems.tax,
+        totalPrice: cart.cartItems.sum,
       })
     )
   }
