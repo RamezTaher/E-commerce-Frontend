@@ -6,8 +6,10 @@ import Loader from "../components/Loader"
 import { useDispatch, useSelector } from "react-redux"
 import { products } from "../redux/actions/productsActions"
 import { Link } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 
 const Home = () => {
+  const { t } = useTranslation(["translation"])
   const dispatch = useDispatch()
   const productsList = useSelector((state) => state.productsList)
 
@@ -17,6 +19,7 @@ const Home = () => {
 
   return (
     <>
+      {t("translation:title")}
       <h1 className="my-2">The Lastest Products</h1>
       {productsList?.loading ? (
         <Loader />
