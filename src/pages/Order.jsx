@@ -47,7 +47,7 @@ const Order = () => {
             </ListGroup.Item>
 
             <ListGroup.Item>
-              <h2>Orders</h2>
+              <h2>Items Ordered</h2>
               {data.orderItems.length === 0 ? (
                 <Message>Empty Order</Message>
               ) : (
