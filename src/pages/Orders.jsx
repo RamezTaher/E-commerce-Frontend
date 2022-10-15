@@ -16,15 +16,15 @@ const Orders = () => {
   const postOrder = useSelector((state) => state.createOrder)
   const { data, success, error } = postOrder
 
-  cart.cartItems.totalPrice = cart.cartItems.reduce(
+  cart.cartItems.itemsPrice = cart.cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   )
 
-  cart.cartItems.shippingPrice = cart.cartItems.totalPrice > 200 ? 0 : 200
-  cart.cartItems.tax = +(0.1 * cart.cartItems.totalPrice).toFixed(2)
+  cart.cartItems.shippingPrice = cart.cartItems.itemsPrice > 200 ? 0 : 200
+  cart.cartItems.tax = +(0.1 * cart.cartItems.itemsPrice).toFixed(2)
   cart.cartItems.sum = +(
-    cart.cartItems.totalPrice +
+    cart.cartItems.itemsPrice +
     cart.cartItems.shippingPrice +
     cart.cartItems.tax
   ).toFixed(2)
@@ -36,7 +36,7 @@ const Orders = () => {
         orderItems: cart.cartItems,
         shippingAddress: shipping,
         paymentMethod: payment.payementMethod,
-        itemsPrice: cart.cartItems.totalPrice,
+        itemsPrice: cart.cartItems.itemsPrice,
         shippingPrice: cart.cartItems.shippingPrice,
         taxPrice: cart.cartItems.tax,
         totalPrice: cart.cartItems.sum,
@@ -114,7 +114,7 @@ const Orders = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${cart.cartItems.totalPrice.toFixed(2)}</Col>
+                  <Col>${cart.cartItems.itemsPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

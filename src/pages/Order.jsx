@@ -10,12 +10,12 @@ import { removeWhiteSpaces } from "../utils/removeWhiteSpaces"
 
 const Order = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
   let { id } = useParams()
 
   const getOrderData = useSelector((state) => state.getOrder)
 
   const { data, loading, error } = getOrderData
+  console.log(data)
 
   useEffect(() => {
     dispatch(getOrder(id))
@@ -43,7 +43,7 @@ const Order = () => {
 
             <ListGroup.Item>
               <h2>Payment</h2>
-              <p>Method: {data.payementMethod}</p>
+              <p>Method: {data.paymentMethod}</p>
             </ListGroup.Item>
 
             <ListGroup.Item>
