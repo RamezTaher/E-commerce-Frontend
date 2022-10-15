@@ -5,6 +5,7 @@ import { Provider } from "react-redux"
 import store from "./redux/store"
 import "./styles/index.css"
 import "./styles/bootstrap.min.css"
+import "./config/i18n"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 
