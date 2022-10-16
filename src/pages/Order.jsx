@@ -49,11 +49,25 @@ const Order = () => {
                                 {removeWhiteSpaces(data.shippingAddress.zipCode)},{" "}
                                 {removeWhiteSpaces(data.shippingAddress.country)}
                             </p>
+
+                            {data?.isPaid ? (
+                                <Message variant={"success"}>Delivered on ${data?.deliveredAt}</Message>
+                            ) : (
+                                <Message variant="danger">Your Order isn't delivered yet</Message>
+                            )}
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <h2>Payment</h2>
-                            <p>Method: {data.paymentMethod}</p>
+                            <p>
+                                {" "}
+                                <span style={{ fontWeight: "bold" }}>Method: </span> {data.paymentMethod}
+                            </p>
+                            {data?.isPaid ? (
+                                <Message variant={"success"}>Paid on ${data?.paidAt}</Message>
+                            ) : (
+                                <Message variant="danger">You Need To Paid Your Order</Message>
+                            )}
                         </ListGroup.Item>
 
                         <ListGroup.Item>
