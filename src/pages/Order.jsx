@@ -48,7 +48,10 @@ const Order = () => {
         }
     }, [dispatch, id, success, data]);
 
-    const paymentHanler = () => {};
+    const paymentHanler = paidRes => {
+        console.log(paidRes);
+        dispatch(putOrder(id, paidRes));
+    };
 
     return loading ? (
         <Loader />
