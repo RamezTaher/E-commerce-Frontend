@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getOrder } from "../redux/actions/ordersActions";
+import { getOrder, putOrder } from "../redux/actions/ordersActions";
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces";
 import { API_URL } from "../constants/api";
 import { useState } from "react";
@@ -18,9 +18,11 @@ const Order = () => {
     const [isSdk, setIsSdk] = useState(false);
 
     const getOrderData = useSelector(state => state.getOrder);
-
     const { data, loading, error } = getOrderData;
     console.log(data);
+
+    const putOrderData = useSelector(state => state.putOrder);
+    const { success, loading: loadingPay, error: errorPay } = putOrderData;
 
     useEffect(() => {
         const integratePayPal = async () => {
@@ -36,10 +38,14 @@ const Order = () => {
             document.body.appendChild(script);
         };
 
-        integratePayPal();
-
-        dispatch(getOrder(id));
-    }, [dispatch, id]);
+        if (!data || success) {
+            dispatch(getOrder(id));
+        } else if (!data.isPaid) {
+            !window.paypal && integratePayPal();
+        } else {
+            setIsSdk(true);
+        }
+    }, [dispatch, id, success, data]);
 
     return loading ? (
         <Loader />
