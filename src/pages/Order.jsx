@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect } from "react";
 import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,10 +8,14 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { getOrder } from "../redux/actions/ordersActions";
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces";
+import { API_URL } from "../constants/api";
+import { useState } from "react";
 
 const Order = () => {
     const dispatch = useDispatch();
-    let { id } = useParams();
+    const { id } = useParams();
+
+    const [isSdk, setIsSdk] = useState(false);
 
     const getOrderData = useSelector(state => state.getOrder);
 
@@ -18,6 +23,21 @@ const Order = () => {
     console.log(data);
 
     useEffect(() => {
+        const integratePayPal = async () => {
+            const { data: clientId } = await axios.get(`${API_URL}/api/config/paypal`);
+            console.log(clientId);
+            const script = document.createElement("script");
+            script.type = "text/javascript";
+            script.async = true;
+            script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+            script.onload = () => {
+                setIsSdk(true);
+            };
+            document.body.appendChild(script);
+        };
+
+        integratePayPal();
+
         dispatch(getOrder(id));
     }, [dispatch, id]);
 
