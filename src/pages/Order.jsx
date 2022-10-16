@@ -10,6 +10,7 @@ import { getOrder, putOrder } from "../redux/actions/ordersActions";
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces";
 import { API_URL } from "../constants/api";
 import { useState } from "react";
+import { PayPalButton } from "react-paypal-button-v2";
 
 const Order = () => {
     const dispatch = useDispatch();
@@ -46,6 +47,8 @@ const Order = () => {
             setIsSdk(true);
         }
     }, [dispatch, id, success, data]);
+
+    const paymentHanler = () => {};
 
     return loading ? (
         <Loader />
@@ -153,6 +156,16 @@ const Order = () => {
                                     <Col>${data.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+                            {!data?.isPaid && (
+                                <ListGroup.Item>
+                                    {loadingPay && <Loader />}
+                                    {isSdk ? (
+                                        <Loader />
+                                    ) : (
+                                        <PayPalButton amount={data.totalPrice} onSuccess={paymentHanler} />
+                                    )}
+                                </ListGroup.Item>
+                            )}
                             <ListGroup.Item>{error && <Message variant={"danger"}>{error}</Message>}</ListGroup.Item>
                         </ListGroup>
                     </Card>
