@@ -84,7 +84,7 @@ const Order = () => {
                                 {removeWhiteSpaces(data.shippingAddress.country)}
                             </p>
 
-                            {data?.isPaid ? (
+                            {data?.isDelivered ? (
                                 <Message variant={"success"}>Delivered on ${data?.deliveredAt}</Message>
                             ) : (
                                 <Message variant="danger">Your Order isn't delivered yet</Message>
