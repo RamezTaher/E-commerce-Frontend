@@ -33,9 +33,17 @@ const Order = () => {
                     <ListGroup variant="flush">
                         <ListGroup.Item>
                             <h2>Shipping</h2>
-                            <p style={{ fontWeight: "bold" }}>{data?.user?.name} </p>
                             <p>
-                                <span style={{ fontWeight: "bold" }}>Address:</span>
+                                {" "}
+                                <span style={{ fontWeight: "bold" }}>Name: </span> {data?.user?.name}{" "}
+                            </p>
+                            <p>
+                                <span style={{ fontWeight: "bold" }}>Email: </span>
+                                <a href={`mailto:${data?.user?.email}`}>{data?.user?.email}</a>
+                            </p>
+
+                            <p>
+                                <span style={{ fontWeight: "bold" }}>Address: </span>
                                 {removeWhiteSpaces(data.shippingAddress.address)},{" "}
                                 {removeWhiteSpaces(data.shippingAddress.city)},{" "}
                                 {removeWhiteSpaces(data.shippingAddress.zipCode)},{" "}
