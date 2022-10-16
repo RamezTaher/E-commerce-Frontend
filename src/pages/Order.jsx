@@ -11,6 +11,7 @@ import { removeWhiteSpaces } from "../utils/removeWhiteSpaces";
 import { API_URL } from "../constants/api";
 import { useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
+import { RESET_ORDER } from "../constants/orderConstants";
 
 const Order = () => {
     const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const Order = () => {
         };
 
         if (!data || success) {
+            dispatch({ type: RESET_ORDER });
             dispatch(getOrder(id));
         } else if (!data.isPaid) {
             !window.paypal && integratePayPal();
