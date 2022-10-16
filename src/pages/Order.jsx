@@ -164,7 +164,7 @@ const Order = () => {
                             {!data?.isPaid && (
                                 <ListGroup.Item>
                                     {loadingPay && <Loader />}
-                                    {isSdk ? (
+                                    {!isSdk ? (
                                         <Loader />
                                     ) : (
                                         <PayPalButton amount={data.totalPrice} onSuccess={paymentHanler} />
