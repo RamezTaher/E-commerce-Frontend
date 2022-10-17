@@ -14,6 +14,8 @@ import Payment from "./pages/Payment"
 import Orders from "./pages/Orders"
 import Order from "./pages/Order"
 
+// Still need to fix some protected routers
+
 const App = () => {
   return (
     <>
