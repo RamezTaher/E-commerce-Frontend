@@ -12,6 +12,7 @@ import {
     GET_ALLORDERS_FAIL,
     GET_ALLORDERS_REQUEST,
     GET_ALLORDERS_SUCCESS,
+    RESET_ALLORDERS,
 } from "../../constants/orderConstants";
 
 export const createOrderReducer = (state = {}, action) => {
@@ -96,6 +97,8 @@ export const getAllOrdersReducer = (state = { allOrders: [] }, action) => {
                 loading: false,
                 error: action.payload,
             };
+        case RESET_ALLORDERS:
+            return { allOrders: [] };
         default:
             return state;
     }
