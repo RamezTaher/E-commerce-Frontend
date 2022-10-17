@@ -10,6 +10,9 @@ import {
     PUT_ORDER_REQUEST,
     PUT_ORDER_SUCCESS,
     PUT_ORDER_FAIL,
+    GET_ALLORDERS_REQUEST,
+    GET_ALLORDERS_SUCCESS,
+    GET_ALLORDERS_FAIL,
 } from "../../constants/orderConstants";
 
 export const createOrder = order => async (dispatch, getState) => {
@@ -97,6 +100,36 @@ export const putOrder = (id, paidRes) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: PUT_ORDER_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};
+
+export const getAllOrders = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: GET_ALLORDERS_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo?.token}`,
+            },
+        };
+
+        const { data } = await axios.get(`${API_URL}/api/orders/myorders`, config);
+
+        dispatch({
+            type: GET_ALLORDERS_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: GET_ALLORDERS_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
