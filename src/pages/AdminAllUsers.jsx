@@ -53,7 +53,7 @@ const AdminAllUsers = () => {
                                     )}
                                 </td>
                                 <td>
-                                    <LinkContainer to={`/users/${user._id}/modify`}>
+                                    <LinkContainer to={`admin/users/${user._id}/modify`}>
                                         <Button variant="light" className="btn-sm">
                                             <i className="fas fa-edit"></i>
                                         </Button>
