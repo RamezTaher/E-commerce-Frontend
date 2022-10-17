@@ -13,8 +13,10 @@ const AdminAllUsers = () => {
     const { loading, error, users } = usersData;
 
     useEffect(() => {
-        dispatch(getAllUsers);
+        dispatch(getAllUsers());
     }, [dispatch]);
+
+    console.log(users);
 
     const deleteHandler = id => {};
     return (
