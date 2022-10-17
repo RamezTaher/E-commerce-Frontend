@@ -9,6 +9,9 @@ import {
     PUT_ORDER_SUCCESS,
     PUT_ORDER_FAIL,
     RESET_ORDER,
+    GET_ALLORDERS_FAIL,
+    GET_ALLORDERS_REQUEST,
+    GET_ALLORDERS_SUCCESS,
 } from "../../constants/orderConstants";
 
 export const createOrderReducer = (state = {}, action) => {
@@ -72,6 +75,27 @@ export const putOrderReducer = (state = {}, action) => {
             };
         case RESET_ORDER:
             return {};
+        default:
+            return state;
+    }
+};
+
+export const getAllOrdersReducer = (state = { allOrders: [] }, action) => {
+    switch (action.type) {
+        case GET_ALLORDERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case GET_ALLORDERS_SUCCESS:
+            return {
+                loading: false,
+                data: action.payload,
+            };
+        case GET_ALLORDERS_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
         default:
             return state;
     }
