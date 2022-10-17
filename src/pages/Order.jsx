@@ -85,7 +85,9 @@ const Order = () => {
                             </p>
 
                             {data?.isDelivered ? (
-                                <Message variant={"success"}>Delivered on ${data?.deliveredAt}</Message>
+                                <Message variant={"success"}>
+                                    Delivered on ${data?.deliveredAt?.substring(0, 10)}
+                                </Message>
                             ) : (
                                 <Message variant="danger">Your Order isn't delivered yet</Message>
                             )}
@@ -98,7 +100,7 @@ const Order = () => {
                                 <span style={{ fontWeight: "bold" }}>Method: </span> {data.paymentMethod}
                             </p>
                             {data?.isPaid ? (
-                                <Message variant={"success"}>Paid on ${data?.paidAt}</Message>
+                                <Message variant={"success"}>Paid on {data?.paidAt?.substring(0, 10)}</Message>
                             ) : (
                                 <Message variant="danger">You Need To Paid Your Order</Message>
                             )}
