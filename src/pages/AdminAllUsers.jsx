@@ -5,12 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getAllUsers } from "../redux/actions/usersActions";
+import { deleteUser, getAllUsers } from "../redux/actions/usersActions";
 
 const AdminAllUsers = () => {
     const dispatch = useDispatch();
     const usersData = useSelector(state => state.users);
     const { loading, error, users } = usersData;
+    const deleteUsersData = useSelector(state => state.deleteUser);
+    // Need To add a react toast 
+    const { success:successDelete } = deleteUsersData;
 
     useEffect(() => {
         dispatch(getAllUsers());
@@ -18,7 +21,9 @@ const AdminAllUsers = () => {
 
     console.log(users);
 
-    const deleteHandler = id => {};
+    const deleteHandler = id => {
+        dispatch(deleteUser(id));
+    };
     return (
         <>
             <h1>Users</h1>
