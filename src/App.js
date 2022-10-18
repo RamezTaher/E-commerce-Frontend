@@ -14,6 +14,7 @@ import Payment from "./pages/Payment";
 import Orders from "./pages/Orders";
 import Order from "./pages/Order";
 import AdminAllUsers from "./pages/AdminAllUsers";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 // Still need to fix some protected routers
 
@@ -24,7 +25,10 @@ const App = () => {
             <main className="py-5">
                 <Container>
                     <Routes>
-                        <Route path="/admin/users" element={<AdminAllUsers />} />
+                        <Route element={<ProtectedRoute />}>
+                            <Route path="/admin/users" element={<AdminAllUsers />} exact />
+                        </Route>
+
                         <Route path="/orders/:id" element={<Order />} />
                         <Route path="/orders" element={<Orders />} />
                         <Route path="/payment" element={<Payment />} />
