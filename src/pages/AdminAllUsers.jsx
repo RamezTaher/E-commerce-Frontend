@@ -12,12 +12,12 @@ const AdminAllUsers = () => {
     const usersData = useSelector(state => state.users);
     const { loading, error, users } = usersData;
     const deleteUsersData = useSelector(state => state.deleteUser);
-    // Need To add a react toast 
-    const { success:successDelete } = deleteUsersData;
+    // Need To add a react toast
+    const { success: successDelete } = deleteUsersData;
 
     useEffect(() => {
         dispatch(getAllUsers());
-    }, [dispatch]);
+    }, [dispatch, successDelete]);
 
     console.log(users);
 
