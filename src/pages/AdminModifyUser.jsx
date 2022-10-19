@@ -13,36 +13,27 @@ const AdminModifyUser = () => {
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [message, setMessage] = useState(null);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const dispatch = useDispatch();
     const location = useLocation();
-    const redirectPath = location.search ? location.search.split("=")[1] : "/";
 
-    const userRegister = useSelector(state => state.userRegister);
-    const { loading, error, userInfo } = userRegister;
+    const userData = useSelector(state => state.profile);
+    const { loading, error, user } = userData;
+
     const submitHandler = e => {
         e.preventDefault();
-        if (password !== confirmPassword) {
-            setMessage("Passwords do not match");
-        } else {
-            dispatch(register(name, email, password));
-        }
     };
 
-    useEffect(() => {
-        if (userInfo) {
-            window.location.href = redirectPath;
-        }
-    }, [userInfo, redirectPath]);
+    useEffect(() => {}, []);
 
     return (
         <>
+            <Link to="/admin/users" className="btn btn-dark my-3">
+                Go Back
+            </Link>
             <FormWrapper>
-                <h1>Register</h1>
-                {message && <Message variant={"danger"}>{message}</Message>}
+                <h1>Modify User</h1>
                 {error && <Message variant={"danger"}>{error}</Message>}
                 {loading ? (
                     <Loader />
@@ -67,37 +58,19 @@ const AdminModifyUser = () => {
                                     onChange={e => setEmail(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="password" className="mb-2">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Enter password"
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                ></Form.Control>
+                            <Form.Group controlId="isAdmin" className="mb-2">
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Make It Admin"
+                                    checked={isAdmin}
+                                    onChange={e => setIsAdmin(e.target.checked)}
+                                ></Form.Check>
                             </Form.Group>
-                            <Form.Group controlId="confirmPassword" className="mb-2">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    placeholder="Confirm password"
-                                    value={confirmPassword}
-                                    onChange={e => setConfirmPassword(e.target.value)}
-                                ></Form.Control>
-                            </Form.Group>
+
                             <Button type="submit" variant="primary">
-                                Register
+                                Confirm
                             </Button>
                         </Form>
-
-                        <Row className="py-3">
-                            <Col>
-                                Already member ?{" "}
-                                <Link to={redirectPath === "/" ? "/login" : `/login?redirect=${redirectPath}`}>
-                                    Update
-                                </Link>
-                            </Col>
-                        </Row>
                     </>
                 )}
             </FormWrapper>
