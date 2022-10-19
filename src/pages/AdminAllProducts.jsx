@@ -10,13 +10,13 @@ import { products } from "../redux/actions/productsActions";
 const AdminAllProducts = () => {
     const dispatch = useDispatch();
     const productsData = useSelector(state => state.productsList);
-    const { loading, error, users } = productsData;
-
+    const { loading, error, data } = productsData;
+    console.log(loading);
     useEffect(() => {
         dispatch(products());
     }, [dispatch]);
 
-    console.log(users);
+    console.log(data);
 
     const deleteHandler = id => {
         // need to add a custom confirmation later on
@@ -31,7 +31,7 @@ const AdminAllProducts = () => {
                 <Col>
                     <h1>Products</h1>
                 </Col>
-                <Col className="text-right">
+                <Col className="d-flex justify-content-end">
                     <Button className="my-3" onClick={createNewProductHandler}>
                         <i className="fas fa-plus"></i>
                         Create New Product{" "}
@@ -55,7 +55,7 @@ const AdminAllProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map((product, idx) => (
+                        {data?.products?.map((product, idx) => (
                             <tr key={idx}>
                                 <td>{product?._id}</td>
                                 <td>{product?.name}</td>
