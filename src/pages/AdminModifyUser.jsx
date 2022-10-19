@@ -3,10 +3,10 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import FormWrapper from "../components/FormWrapper";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/actions/authActions";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
+import { getProfile } from "../redux/actions/profileActions";
 
 const AdminModifyUser = () => {
     const { id } = useParams();
@@ -16,7 +16,6 @@ const AdminModifyUser = () => {
     const [isAdmin, setIsAdmin] = useState(false);
 
     const dispatch = useDispatch();
-    const location = useLocation();
 
     const userData = useSelector(state => state.profile);
     const { loading, error, user } = userData;
@@ -25,7 +24,15 @@ const AdminModifyUser = () => {
         e.preventDefault();
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (!user.name || user._id !== id) {
+            dispatch(getProfile(id));
+        } else {
+            setName(user.name);
+            setEmail(user.email);
+            setIsAdmin(user.isAdmin);
+        }
+    }, [user, dispatch, id]);
 
     return (
         <>
@@ -61,7 +68,7 @@ const AdminModifyUser = () => {
                             <Form.Group controlId="isAdmin" className="mb-2">
                                 <Form.Check
                                     type="checkbox"
-                                    label="Make It Admin"
+                                    label={"Is Admin "}
                                     checked={isAdmin}
                                     onChange={e => setIsAdmin(e.target.checked)}
                                 ></Form.Check>
