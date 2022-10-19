@@ -14,7 +14,8 @@ const AdminAllProducts = () => {
     const { loading, error, data } = productsData;
     console.log(loading);
 
-    const deleteProductData = useSelector(state => state.productsList);
+    const deleteProductData = useSelector(state => state.productDetails);
+    
     const { loading: deleteLoading, error: deleteError, success: deleteSuccess } = deleteProductData;
 
     useEffect(() => {
@@ -22,6 +23,7 @@ const AdminAllProducts = () => {
     }, [dispatch, deleteSuccess]);
 
     console.log(data);
+    console.log(deleteSuccess);
 
     const deleteHandler = id => {
         // need to add a custom confirmation later on

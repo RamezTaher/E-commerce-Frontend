@@ -19,7 +19,7 @@ export const productReducer = (state = { product: { reviews: [] } }, action) => 
             return state;
     }
 };
-export const deleteProductReducer = (state = { success: false }, action) => {
+export const deleteProductReducer = (state = {}, action) => {
     switch (action.type) {
         case DELETE_PRODUCT_REQUEST:
             return { loading: true, success: false };
