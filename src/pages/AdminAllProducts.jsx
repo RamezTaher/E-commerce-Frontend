@@ -14,9 +14,9 @@ const AdminAllProducts = () => {
     const { loading, error, data } = productsData;
     console.log(loading);
 
-    const deleteProductData = useSelector(state => state.productDetails);
-    
-    const { loading: deleteLoading, error: deleteError, success: deleteSuccess } = deleteProductData;
+    const deleteProductData = useSelector(state => state.deleteProduct);
+
+    const { error: deleteError, success: deleteSuccess } = deleteProductData;
 
     useEffect(() => {
         dispatch(products());
@@ -46,7 +46,7 @@ const AdminAllProducts = () => {
                     </Button>
                 </Col>
             </Row>
-            {deleteLoading && <Loader />}
+
             {deleteError && <Message variant={"danger"}>{deleteError}</Message>}
             {loading ? (
                 <Loader />
