@@ -43,8 +43,10 @@ const Header = () => {
                             {userInfo && userInfo?.isAdmin && (
                                 <NavDropdown className="mx-2" title={"admin"} id="Admin">
                                     <NavDropdown.Item onClick={() => goTo("admin/users")}>Users</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={() => goTo("admin/products")}>Products</NavDropdown.Item>
-                                    <NavDropdown.Item onClick={() => goTo("admin/orders")}>Orders</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => goTo("/admin/products")}>
+                                        Products
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={() => goTo("/admin/orders")}>Orders</NavDropdown.Item>
                                 </NavDropdown>
                             )}
                         </Nav>
