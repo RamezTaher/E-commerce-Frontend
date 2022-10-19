@@ -36,12 +36,12 @@ export const deleteUserReducer = (state = {}, action) => {
             return state;
     }
 };
-export const updateUserReducer = (state = { user: {} }, action) => {
+export const updateUserReducer = (state = { user: {}, success: false }, action) => {
     switch (action.type) {
         case UPDATE_USER_REQUEST:
-            return { ...state, loading: true };
+            return { loading: true };
         case UPDATE_USER_SUCCESS:
-            return { loading: false, user: action.payload };
+            return { loading: false, success: true };
         case UPDATE_USER_FAIL:
             return { loading: false, error: action.payload };
         case UPDATE_USER_RESET:

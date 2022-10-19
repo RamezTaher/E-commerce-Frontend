@@ -3,14 +3,17 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import FormWrapper from "../components/FormWrapper";
 import Message from "../components/Message";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
 import { getProfile } from "../redux/actions/profileActions";
+import { UPDATE_USER_RESET } from "../constants/users";
+import { updateUser } from "../redux/actions/usersActions";
 
 const AdminModifyUser = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -19,19 +22,29 @@ const AdminModifyUser = () => {
     const userData = useSelector(state => state.profile);
     const { loading, error, user } = userData;
 
+    const userUpdateData = useSelector(state => state.updateUser);
+    const { loading: updateLoading, error: updateError, success: updateSuccess } = userUpdateData;
+
     const submitHandler = e => {
         e.preventDefault();
+        dispatch(updateUser({ _id: id, name, email, isAdmin }));
     };
 
     useEffect(() => {
-        if (!user.name || user._id !== id) {
-            dispatch(getProfile(id));
+        if (updateSuccess) {
+            dispatch({ type: UPDATE_USER_RESET });
+            // Need To add to toast success here
+            navigate("/admin/users");
         } else {
-            setName(user.name);
-            setEmail(user.email);
-            setIsAdmin(user.isAdmin);
+            if (!user.name || user._id !== id) {
+                dispatch(getProfile(id));
+            } else {
+                setName(user.name);
+                setEmail(user.email);
+                setIsAdmin(user.isAdmin);
+            }
         }
-    }, [user, dispatch, id]);
+    }, [user, dispatch, id, updateSuccess, navigate]);
 
     return (
         <>
@@ -40,6 +53,8 @@ const AdminModifyUser = () => {
             </Link>
             <FormWrapper>
                 <h1>Modify User</h1>
+                {updateLoading && <Loader />}
+                {updateError && <Message variant={"danger"}>{updateError}</Message>}
                 {error && <Message variant={"danger"}>{error}</Message>}
                 {loading ? (
                     <Loader />
@@ -73,7 +88,7 @@ const AdminModifyUser = () => {
                                 ></Form.Check>
                             </Form.Group>
 
-                            <Button type="submit" variant="primary">
+                            <Button type="submit" variant="primary" onClick={() => submitHandler}>
                                 Confirm
                             </Button>
                         </Form>
