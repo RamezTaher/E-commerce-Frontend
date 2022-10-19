@@ -10,12 +10,11 @@ import { getProfile } from "../redux/actions/profileActions";
 
 const AdminModifyUser = () => {
     const { id } = useParams();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
-
-    const dispatch = useDispatch();
 
     const userData = useSelector(state => state.profile);
     const { loading, error, user } = userData;
