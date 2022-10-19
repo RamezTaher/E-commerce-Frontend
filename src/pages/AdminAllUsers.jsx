@@ -22,7 +22,10 @@ const AdminAllUsers = () => {
     console.log(users);
 
     const deleteHandler = id => {
-        dispatch(deleteUser(id));
+        // need to add a custom confirmation later on
+        if (window.confirm("Are you sure to delete this user")) {
+            dispatch(deleteUser(id));
+        }
     };
     return (
         <>
