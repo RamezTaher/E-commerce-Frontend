@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import { deleteProduct } from "../redux/actions/productActions";
 import { products } from "../redux/actions/productsActions";
 
 const AdminAllProducts = () => {
@@ -12,15 +13,20 @@ const AdminAllProducts = () => {
     const productsData = useSelector(state => state.productsList);
     const { loading, error, data } = productsData;
     console.log(loading);
+
+    const deleteProductData = useSelector(state => state.productsList);
+    const { loading: deleteLoading, error: deleteError, success: deleteSuccess } = deleteProductData;
+
     useEffect(() => {
         dispatch(products());
-    }, [dispatch]);
+    }, [dispatch, deleteSuccess]);
 
     console.log(data);
 
     const deleteHandler = id => {
         // need to add a custom confirmation later on
         if (window.confirm("Are you sure to delete this user")) {
+            dispatch(deleteProduct(id));
         }
     };
 
@@ -38,6 +44,8 @@ const AdminAllProducts = () => {
                     </Button>
                 </Col>
             </Row>
+            {deleteLoading && <Loader />}
+            {deleteError && <Message variant={"danger"}>{deleteError}</Message>}
             {loading ? (
                 <Loader />
             ) : error ? (
