@@ -7,7 +7,7 @@ import { useParams, useLocation } from "react-router-dom"
 import { Link, useNavigate } from "react-router-dom"
 
 const Cart = () => {
-  let { id } = useParams()
+  const { id } = useParams()
 
   const location = useLocation()
   const navigate = useNavigate()

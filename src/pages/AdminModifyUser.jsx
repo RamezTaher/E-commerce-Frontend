@@ -6,8 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/actions/authActions";
 import { Link, useLocation } from "react-router-dom";
 import Loader from "../components/Loader";
+import { useParams } from "react-router-dom";
 
 const AdminModifyUser = () => {
+    const { id } = useParams();
+
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
@@ -91,8 +94,7 @@ const AdminModifyUser = () => {
                             <Col>
                                 Already member ?{" "}
                                 <Link to={redirectPath === "/" ? "/login" : `/login?redirect=${redirectPath}`}>
-                                    {" "}
-                                    Login
+                                    Update
                                 </Link>
                             </Col>
                         </Row>
