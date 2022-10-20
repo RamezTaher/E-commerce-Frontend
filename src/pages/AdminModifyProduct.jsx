@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
-import { product } from "../redux/actions/productActions";
+import { product, putProduct } from "../redux/actions/productActions";
 import { PUT_PRODUCT_RESET } from "../constants/productConstants";
 
 const AdminModifyProduct = () => {
@@ -26,7 +26,7 @@ const AdminModifyProduct = () => {
     const { loading, error, product: getProduct } = productDetailsData;
 
     const putProductData = useSelector(state => state.putProduct);
-    const { loading: putLoading, error: putError, product: putProduct, success: putSuccess } = putProductData;
+    const { error: putError, success: putSuccess } = putProductData;
 
     useEffect(() => {
         if (putSuccess) {
@@ -49,6 +49,18 @@ const AdminModifyProduct = () => {
 
     const submitHandler = e => {
         e.preventDefault();
+        dispatch(
+            putProduct({
+                _id: id,
+                name,
+                price,
+                image,
+                brand,
+                category,
+                countInStock,
+                description,
+            }),
+        );
     };
 
     return (
