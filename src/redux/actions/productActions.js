@@ -9,6 +9,9 @@ import {
     POST_PRODUCT_REQUEST,
     POST_PRODUCT_SUCCESS,
     POST_PRODUCT_FAIL,
+    PUT_PRODUCT_REQUEST,
+    PUT_PRODUCT_SUCCESS,
+    PUT_PRODUCT_FAIL,
 } from "../../constants/productConstants";
 
 import { API_URL } from "../../constants/api";
@@ -69,7 +72,6 @@ export const postProduct = () => async (dispatch, getState) => {
 
         const config = {
             headers: {
-                "Content-type": "application/json",
                 Authorization: `Bearer ${userInfo?.token}`,
             },
         };
@@ -83,6 +85,37 @@ export const postProduct = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: POST_PRODUCT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};
+
+export const putProduct = updatedProduct => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: PUT_PRODUCT_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${userInfo?.token}`,
+            },
+        };
+
+        const { data } = await axios.put(`${API_URL}/api/products/${updatedProduct._id}`, product, config);
+
+        dispatch({
+            type: PUT_PRODUCT_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: PUT_PRODUCT_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
