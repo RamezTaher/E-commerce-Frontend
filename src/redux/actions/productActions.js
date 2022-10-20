@@ -74,10 +74,11 @@ export const postProduct = product => async (dispatch, getState) => {
             },
         };
 
-        await axios.post(`${API_URL}/api/products`, config);
+        const { data } = await axios.post(`${API_URL}/api/products`, config);
 
         dispatch({
             type: POST_PRODUCT_SUCCESS,
+            payload: data,
         });
     } catch (error) {
         dispatch({
