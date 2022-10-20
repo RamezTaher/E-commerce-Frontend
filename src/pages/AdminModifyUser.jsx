@@ -36,7 +36,7 @@ const AdminModifyUser = () => {
             // Need To add to toast success here
             navigate("/admin/users");
         } else {
-            if (!user.name || user._id !== id) {
+            if (!user?.name || user?._id !== id) {
                 dispatch(getProfile(id));
             } else {
                 setName(user.name);

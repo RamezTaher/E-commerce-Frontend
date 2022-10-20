@@ -23,9 +23,10 @@ const AdminModifyProduct = () => {
 
     const productDetailsData = useSelector(state => state.productDetails);
     const { loading, error, product: getProduct } = productDetailsData;
+    console.log(getProduct);
 
     useEffect(() => {
-        if (!product.name || getProduct._id !== id) {
+        if (!getProduct?.name || getProduct?._id !== id) {
             dispatch(product(id));
         } else {
             setName(getProduct.email);
@@ -69,10 +70,11 @@ const AdminModifyProduct = () => {
                             <Form.Group controlId="price" className="mb-2">
                                 <Form.Label>Product Price</Form.Label>
                                 <Form.Control
-                                    type="text"
+                                    type="number"
+                                    min={0}
                                     placeholder="Enter Product Price"
                                     value={price}
-                                    onChange={e => setPrice(+e.target.value)}
+                                    onChange={e => setPrice(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId="image" className="mb-2">
@@ -96,7 +98,8 @@ const AdminModifyProduct = () => {
                             <Form.Group controlId="countInStock" className="mb-2">
                                 <Form.Label>Product Count In Stock</Form.Label>
                                 <Form.Control
-                                    type="text"
+                                    type="number"
+                                    min={0}
                                     placeholder="Enter Product Count In Stock "
                                     value={countInStock}
                                     onChange={e => setCountInStock(+e.target.value)}
@@ -114,12 +117,13 @@ const AdminModifyProduct = () => {
 
                             <Form.Group controlId="description" className="mb-2">
                                 <Form.Label>Product Description</Form.Label>
-                                <Form.Text
+                                <Form.Control
+                                    as="textarea"
                                     type="text"
                                     placeholder="Enter Product Catagory "
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}
-                                ></Form.Text>
+                                ></Form.Control>
                             </Form.Group>
 
                             <Button type="submit" variant="primary" onClick={() => submitHandler}>
