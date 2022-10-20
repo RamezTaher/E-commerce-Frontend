@@ -19,7 +19,7 @@ const AdminModifyProduct = () => {
     const [brand, setBrand] = useState("");
     const [catagory, setCatagory] = useState("");
     const [countInStock, setCountInStock] = useState(0);
-    const [discription, setDiscription] = useState("");
+    const [description, setDescription] = useState("");
 
     const productDetailsData = useSelector(state => state.productDetails);
     const { loading, error, product: getProduct } = productDetailsData;
@@ -34,7 +34,7 @@ const AdminModifyProduct = () => {
             setBrand(getProduct.brand);
             setCatagory(getProduct.catagory);
             setCountInStock(getProduct.countInStock);
-            setDiscription(getProduct.discription);
+            setDescription(getProduct.description);
         }
     }, [getProduct, dispatch, id, navigate]);
 
@@ -48,7 +48,7 @@ const AdminModifyProduct = () => {
                 Go Back
             </Link>
             <FormWrapper>
-                <h1>Modify User</h1>
+                <h1>Modify Product</h1>
                 {loading && <Loader />}
                 {error && <Message variant={"danger"}>{error}</Message>}
 
@@ -58,30 +58,68 @@ const AdminModifyProduct = () => {
                     <>
                         <Form onSubmit={submitHandler}>
                             <Form.Group controlId="name" className="mb-2">
-                                <Form.Label>Name</Form.Label>
+                                <Form.Label>Product Name</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder="Enter name"
+                                    placeholder="Enter Product name"
                                     value={name}
                                     onChange={e => setName(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="email" className="mb-2">
-                                <Form.Label>Email Address</Form.Label>
+                            <Form.Group controlId="price" className="mb-2">
+                                <Form.Label>Product Price</Form.Label>
                                 <Form.Control
-                                    type="email"
-                                    placeholder="Enter email"
-                                    value={email}
-                                    onChange={e => setEmail(e.target.value)}
+                                    type="text"
+                                    placeholder="Enter Product Price"
+                                    value={price}
+                                    onChange={e => setPrice(+e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
-                            <Form.Group controlId="isAdmin" className="mb-2">
-                                <Form.Check
-                                    type="checkbox"
-                                    label={"Is Admin "}
-                                    checked={isAdmin}
-                                    onChange={e => setIsAdmin(e.target.checked)}
-                                ></Form.Check>
+                            <Form.Group controlId="image" className="mb-2">
+                                <Form.Label>Product Image</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter Product Image Url"
+                                    value={img}
+                                    onChange={e => setImg(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="brand" className="mb-2">
+                                <Form.Label>Product Brand</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter Product Brand "
+                                    value={brand}
+                                    onChange={e => setBrand(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="countInStock" className="mb-2">
+                                <Form.Label>Product Count In Stock</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter Product Count In Stock "
+                                    value={countInStock}
+                                    onChange={e => setCountInStock(+e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="catagory" className="mb-2">
+                                <Form.Label>Product Catagory</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter Product Catagory "
+                                    value={catagory}
+                                    onChange={e => setCatagory(e.target.value)}
+                                ></Form.Control>
+                            </Form.Group>
+
+                            <Form.Group controlId="description" className="mb-2">
+                                <Form.Label>Product Description</Form.Label>
+                                <Form.Text
+                                    type="text"
+                                    placeholder="Enter Product Catagory "
+                                    value={description}
+                                    onChange={e => setDescription(e.target.value)}
+                                ></Form.Text>
                             </Form.Group>
 
                             <Button type="submit" variant="primary" onClick={() => submitHandler}>
