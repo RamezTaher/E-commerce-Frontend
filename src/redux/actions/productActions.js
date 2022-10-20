@@ -107,7 +107,7 @@ export const putProduct = updatedProduct => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.put(`${API_URL}/api/products/${updatedProduct._id}`, product, config);
+        const { data } = await axios.put(`${API_URL}/api/products/${updatedProduct._id}`, updatedProduct, config);
 
         dispatch({
             type: PUT_PRODUCT_SUCCESS,
