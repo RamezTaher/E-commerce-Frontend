@@ -36,7 +36,7 @@ export const deleteProductReducer = (state = { success: false }, action) => {
     }
 };
 
-export const postProductReducer = (state = {}, action) => {
+export const postProductReducer = (state = { success: false }, action) => {
     switch (action.type) {
         case POST_PRODUCT_REQUEST:
             return { loading: true };

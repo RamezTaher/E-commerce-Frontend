@@ -3,24 +3,35 @@ import { useEffect } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { deleteProduct } from "../redux/actions/productActions";
+import { POST_PRODUCT_RESET } from "../constants/productConstants";
+import { deleteProduct, postProduct } from "../redux/actions/productActions";
 import { products } from "../redux/actions/productsActions";
 
 const AdminAllProducts = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const productsData = useSelector(state => state.productsList);
     const { loading, error, data } = productsData;
     console.log(loading);
 
     const deleteProductData = useSelector(state => state.deleteProduct);
-
     const { error: deleteError, success: deleteSuccess } = deleteProductData;
 
+    const postProductData = useSelector(state => state.postProduct);
+    const { error: postError, success: postSuccess, product: newProduct } = postProductData;
+
     useEffect(() => {
-        dispatch(products());
-    }, [dispatch, deleteSuccess]);
+        dispatch({ type: POST_PRODUCT_RESET });
+        if (postSuccess) {
+            navigate(`/admin/products/${newProduct._id}/modify`);
+        } else {
+            dispatch(products());
+        }
+    }, [dispatch, deleteSuccess, postSuccess, navigate, newProduct]);
 
     console.log(data);
     console.log(deleteSuccess);
@@ -32,7 +43,9 @@ const AdminAllProducts = () => {
         }
     };
 
-    const createNewProductHandler = () => {};
+    const createNewProductHandler = () => {
+        dispatch(postProduct());
+    };
     return (
         <>
             <Row className="align-items-center">
@@ -48,6 +61,7 @@ const AdminAllProducts = () => {
             </Row>
 
             {deleteError && <Message variant={"danger"}>{deleteError}</Message>}
+            {postError && <Message variant={"danger"}>{postError}</Message>}
             {loading ? (
                 <Loader />
             ) : error ? (

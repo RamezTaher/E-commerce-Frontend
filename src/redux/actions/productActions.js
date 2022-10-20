@@ -57,7 +57,7 @@ export const deleteProduct = id => async (dispatch, getState) => {
         });
     }
 };
-export const postProduct = product => async (dispatch, getState) => {
+export const postProduct = () => async (dispatch, getState) => {
     try {
         dispatch({
             type: POST_PRODUCT_REQUEST,
@@ -74,7 +74,7 @@ export const postProduct = product => async (dispatch, getState) => {
             },
         };
 
-        const { data } = await axios.post(`${API_URL}/api/products`, config);
+        const { data } = await axios.post(`${API_URL}/api/products`, {}, config);
 
         dispatch({
             type: POST_PRODUCT_SUCCESS,
