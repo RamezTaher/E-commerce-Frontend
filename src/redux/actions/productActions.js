@@ -6,6 +6,9 @@ import {
     DELETE_PRODUCT_REQUEST,
     DELETE_PRODUCT_SUCCESS,
     DELETE_PRODUCT_FAIL,
+    POST_PRODUCT_REQUEST,
+    POST_PRODUCT_SUCCESS,
+    POST_PRODUCT_FAIL,
 } from "../../constants/productConstants";
 
 import { API_URL } from "../../constants/api";
@@ -50,6 +53,35 @@ export const deleteProduct = id => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: DELETE_PRODUCT_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};
+export const postProduct = product => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: POST_PRODUCT_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${userInfo?.token}`,
+            },
+        };
+
+        await axios.post(`${API_URL}/api/products`, config);
+
+        dispatch({
+            type: POST_PRODUCT_SUCCESS,
+        });
+    } catch (error) {
+        dispatch({
+            type: POST_PRODUCT_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
