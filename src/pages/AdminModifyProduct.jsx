@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
 import { product } from "../redux/actions/productActions";
+import { PUT_PRODUCT_RESET } from "../constants/productConstants";
 
 const AdminModifyProduct = () => {
     const { id } = useParams();
@@ -24,22 +25,27 @@ const AdminModifyProduct = () => {
     const productDetailsData = useSelector(state => state.productDetails);
     const { loading, error, product: getProduct } = productDetailsData;
 
-    const putProductData = useSelector(state => state.productDetails);
+    const putProductData = useSelector(state => state.putProduct);
     const { loading: putLoading, error: putError, product: putProduct, success: putSuccess } = putProductData;
 
     useEffect(() => {
-        if (!getProduct?.name || getProduct?._id !== id) {
-            dispatch(product(id));
+        if (putSuccess) {
+            dispatch({ type: PUT_PRODUCT_RESET });
+            navigate("/admin/products");
         } else {
-            setName(getProduct.name);
-            setPrice(getProduct.price);
-            setImage(getProduct.image);
-            setBrand(getProduct.brand);
-            setCategory(getProduct.category);
-            setCountInStock(getProduct.countInStock);
-            setDescription(getProduct.description);
+            if (!getProduct?.name || getProduct?._id !== id) {
+                dispatch(product(id));
+            } else {
+                setName(getProduct.name);
+                setPrice(getProduct.price);
+                setImage(getProduct.image);
+                setBrand(getProduct.brand);
+                setCategory(getProduct.category);
+                setCountInStock(getProduct.countInStock);
+                setDescription(getProduct.description);
+            }
         }
-    }, [getProduct, dispatch, id, navigate]);
+    }, [getProduct, dispatch, id, navigate, putSuccess]);
 
     const submitHandler = e => {
         e.preventDefault();
@@ -54,6 +60,7 @@ const AdminModifyProduct = () => {
                 <h1>Modify Product</h1>
                 {loading && <Loader />}
                 {error && <Message variant={"danger"}>{error}</Message>}
+                {putError && <Message variant={"danger"}>{putError}</Message>}
 
                 {loading ? (
                     <Loader />
