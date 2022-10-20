@@ -6,56 +6,52 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
-import { getProfile } from "../redux/actions/profileActions";
-import { UPDATE_USER_RESET } from "../constants/users";
-import { updateUser } from "../redux/actions/usersActions";
+import { product } from "../redux/actions/productActions";
 
 const AdminModifyProduct = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [price, setPrice] = useState(0);
+    const [img, setImg] = useState("");
+    const [brand, setBrand] = useState("");
+    const [catagory, setCatagory] = useState("");
+    const [countInStock, setCountInStock] = useState(0);
+    const [discription, setDiscription] = useState("");
 
-    const userData = useSelector(state => state.profile);
-    const { loading, error, user } = userData;
+    const productDetailsData = useSelector(state => state.productDetails);
+    const { loading, error, product: getProduct } = productDetailsData;
 
-    const userUpdateData = useSelector(state => state.updateUser);
-    const { loading: updateLoading, error: updateError, success: updateSuccess } = userUpdateData;
+    useEffect(() => {
+        if (!product.name || getProduct._id !== id) {
+            dispatch(product(id));
+        } else {
+            setName(getProduct.email);
+            setPrice(getProduct.price);
+            setImg(getProduct.img);
+            setBrand(getProduct.brand);
+            setCatagory(getProduct.catagory);
+            setCountInStock(getProduct.countInStock);
+            setDiscription(getProduct.discription);
+        }
+    }, [getProduct, dispatch, id, navigate]);
 
     const submitHandler = e => {
         e.preventDefault();
-        dispatch(updateUser({ _id: id, name, email, isAdmin }));
     };
-
-    useEffect(() => {
-        if (updateSuccess) {
-            dispatch({ type: UPDATE_USER_RESET });
-            // Need To add to toast success here
-            navigate("/admin/users");
-        } else {
-            if (!user.name || user._id !== id) {
-                dispatch(getProfile(id));
-            } else {
-                setName(user.name);
-                setEmail(user.email);
-                setIsAdmin(user.isAdmin);
-            }
-        }
-    }, [user, dispatch, id, updateSuccess, navigate]);
 
     return (
         <>
-            <Link to="/admin/users" className="btn btn-dark my-3">
+            <Link to="/admin/products" className="btn btn-dark my-3">
                 Go Back
             </Link>
             <FormWrapper>
                 <h1>Modify User</h1>
-                {updateLoading && <Loader />}
-                {updateError && <Message variant={"danger"}>{updateError}</Message>}
+                {loading && <Loader />}
                 {error && <Message variant={"danger"}>{error}</Message>}
+
                 {loading ? (
                     <Loader />
                 ) : (
