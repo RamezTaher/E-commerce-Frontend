@@ -23,7 +23,9 @@ const AdminModifyProduct = () => {
 
     const productDetailsData = useSelector(state => state.productDetails);
     const { loading, error, product: getProduct } = productDetailsData;
-    console.log(getProduct);
+
+    const putProductData = useSelector(state => state.productDetails);
+    const { loading: putLoading, error: putError, product: putProduct, success: putSuccess } = putProductData;
 
     useEffect(() => {
         if (!getProduct?.name || getProduct?._id !== id) {
