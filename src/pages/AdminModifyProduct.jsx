@@ -15,9 +15,9 @@ const AdminModifyProduct = () => {
 
     const [name, setName] = useState("");
     const [price, setPrice] = useState(0);
-    const [img, setImg] = useState("");
+    const [image, setImage] = useState("");
     const [brand, setBrand] = useState("");
-    const [catagory, setCatagory] = useState("");
+    const [category, setCategory] = useState("");
     const [countInStock, setCountInStock] = useState(0);
     const [description, setDescription] = useState("");
 
@@ -29,11 +29,11 @@ const AdminModifyProduct = () => {
         if (!getProduct?.name || getProduct?._id !== id) {
             dispatch(product(id));
         } else {
-            setName(getProduct.email);
+            setName(getProduct.name);
             setPrice(getProduct.price);
-            setImg(getProduct.img);
+            setImage(getProduct.image);
             setBrand(getProduct.brand);
-            setCatagory(getProduct.catagory);
+            setCategory(getProduct.category);
             setCountInStock(getProduct.countInStock);
             setDescription(getProduct.description);
         }
@@ -82,15 +82,15 @@ const AdminModifyProduct = () => {
                                 <Form.Control
                                     type="text"
                                     placeholder="Enter Product Image Url"
-                                    value={img}
-                                    onChange={e => setImg(e.target.value)}
+                                    value={image}
+                                    onChange={e => setImage(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
                             <Form.Group controlId="brand" className="mb-2">
                                 <Form.Label>Product Brand</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder="Enter Product Brand "
+                                    placeholder="Enter Product Brand"
                                     value={brand}
                                     onChange={e => setBrand(e.target.value)}
                                 ></Form.Control>
@@ -100,7 +100,7 @@ const AdminModifyProduct = () => {
                                 <Form.Control
                                     type="number"
                                     min={0}
-                                    placeholder="Enter Product Count In Stock "
+                                    placeholder="Enter Product Count In Stock"
                                     value={countInStock}
                                     onChange={e => setCountInStock(+e.target.value)}
                                 ></Form.Control>
@@ -109,9 +109,9 @@ const AdminModifyProduct = () => {
                                 <Form.Label>Product Catagory</Form.Label>
                                 <Form.Control
                                     type="text"
-                                    placeholder="Enter Product Catagory "
-                                    value={catagory}
-                                    onChange={e => setCatagory(e.target.value)}
+                                    placeholder="Enter Product Catagory"
+                                    value={category}
+                                    onChange={e => setCategory(e.target.value)}
                                 ></Form.Control>
                             </Form.Group>
 
@@ -119,8 +119,9 @@ const AdminModifyProduct = () => {
                                 <Form.Label>Product Description</Form.Label>
                                 <Form.Control
                                     as="textarea"
+                                    rows={3}
                                     type="text"
-                                    placeholder="Enter Product Catagory "
+                                    placeholder="Enter Product Catagory"
                                     value={description}
                                     onChange={e => setDescription(e.target.value)}
                                 ></Form.Control>

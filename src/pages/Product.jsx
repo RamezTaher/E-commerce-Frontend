@@ -13,7 +13,7 @@ const Product = () => {
     const dispatch = useDispatch();
 
     const productDetails = useSelector(state => state.productDetails);
-    const { loading, error, data } = productDetails;
+    const { loading, error, product: data } = productDetails;
 
     useEffect(() => {
         dispatch(product(id));

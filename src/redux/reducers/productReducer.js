@@ -14,9 +14,9 @@ import {
 export const productReducer = (state = { product: { reviews: [] } }, action) => {
     switch (action.type) {
         case PRODUCT_REQUEST:
-            return { loading: true, data: [] };
+            return { loading: true };
         case PRODUCT_SUCCESS:
-            return { loading: false, data: action.payload };
+            return { loading: false, product: action.payload };
         case PRODUCT_FAIL:
             return { loading: false, error: action.payload };
         default:
