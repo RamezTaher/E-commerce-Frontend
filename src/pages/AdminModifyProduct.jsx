@@ -61,6 +61,7 @@ const AdminModifyProduct = () => {
                 description,
             }),
         );
+        dispatch({ type: PUT_PRODUCT_RESET });
     };
 
     return (
