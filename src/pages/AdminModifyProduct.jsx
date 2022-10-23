@@ -72,7 +72,7 @@ const AdminModifyProduct = () => {
         const img = e.target.files[0];
         console.log(img);
         const formData = new FormData();
-        formData.append(img.name, img);
+        formData.append("image", img);
         console.log(formData);
         setIsUploading(true);
         try {
