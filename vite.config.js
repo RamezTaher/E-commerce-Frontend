@@ -1,6 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-refresh";
 
-export default defineConfig({
+// https://vitejs.dev/config/
+export default defineConfig(configEnv => ({
     plugins: [react()],
-});
+    build: {
+        outDir: "build",
+    },
+}));
