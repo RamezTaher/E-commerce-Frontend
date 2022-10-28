@@ -18,6 +18,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 import AdminModifyUser from "./pages/AdminModifyUser";
 import AdminAllProducts from "./pages/AdminAllProducts";
 import AdminModifyProduct from "./pages/AdminModifyProduct";
+import AdminAllOrders from "./pages/AdminAllOrders";
 
 // Still need to fix some protected routers
 
@@ -33,6 +34,7 @@ const App = () => {
                             <Route path="/admin/users/:id/modify" element={<AdminModifyUser />} exact />
                             <Route path="/admin/products/" element={<AdminAllProducts />} exact />
                             <Route path="/admin/products/:id/modify" element={<AdminModifyProduct />} exact />
+                            <Route path="/admin/orders" element={<AdminAllOrders />} exact />
                         </Route>
 
                         <Route path="/orders/:id" element={<Order />} />
