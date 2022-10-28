@@ -171,7 +171,7 @@ export const adminGetAllOrders = () => async (dispatch, getState) => {
     }
 };
 
-export const putDeliverOrder = order => async (dispatch, getState) => {
+export const putOrderDeliver = order => async (dispatch, getState) => {
     try {
         dispatch({
             type: PUT_ORDER_DELIVER_REQUEST,

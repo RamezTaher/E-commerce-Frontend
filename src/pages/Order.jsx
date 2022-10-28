@@ -1,17 +1,17 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getOrder, putOrder } from "../redux/actions/ordersActions";
+import { getOrder, putOrder, putOrderDeliver } from "../redux/actions/ordersActions";
 import { removeWhiteSpaces } from "../utils/removeWhiteSpaces";
 import { API_URL } from "../constants/api";
 import { useState } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
-import { RESET_ORDER } from "../constants/orderConstants";
+import { RESET_ORDER, RESET_ORDER_DELIVER } from "../constants/orderConstants";
 
 const Order = () => {
     const dispatch = useDispatch();
@@ -23,8 +23,16 @@ const Order = () => {
     const { data, loading, error } = getOrderData;
     console.log(data);
 
+    // get user info
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+
+    // Pay Order
     const putOrderData = useSelector(state => state.putOrder);
     const { success, loading: loadingPay, error: errorPay } = putOrderData;
+    // Set order as delivered
+    const putOrderDeliverData = useSelector(state => state.putOrderDeliver);
+    const { success: successDeliver, loading: loadingDeliver, error: errorDeliver } = putOrderDeliverData;
 
     useEffect(() => {
         const integratePayPal = async () => {
@@ -40,19 +48,24 @@ const Order = () => {
             document.body.appendChild(script);
         };
 
-        if (!data || success) {
+        if (!data || success || successDeliver) {
             dispatch({ type: RESET_ORDER });
+            dispatch({ type: RESET_ORDER_DELIVER });
             dispatch(getOrder(id));
         } else if (!data.isPaid) {
             !window.paypal && integratePayPal();
         } else {
             setIsSdk(true);
         }
-    }, [dispatch, id, success, data]);
+    }, [dispatch, id, success, data, successDeliver]);
 
     const paymentHanler = paidRes => {
         console.log(paidRes);
         dispatch(putOrder(id, paidRes));
+    };
+
+    const deliverHandler = order => {
+        dispatch(putOrderDeliver(order));
     };
 
     return loading ? (
@@ -86,7 +99,7 @@ const Order = () => {
 
                             {data?.isDelivered ? (
                                 <Message variant={"success"}>
-                                    Delivered on ${data?.deliveredAt?.substring(0, 10)}
+                                    Delivered on {data?.deliveredAt?.substring(0, 10)}
                                 </Message>
                             ) : (
                                 <Message variant="danger">Your Order isn't delivered yet</Message>
@@ -171,6 +184,18 @@ const Order = () => {
                                     ) : (
                                         <PayPalButton amount={data.totalPrice} onSuccess={paymentHanler} />
                                     )}
+                                </ListGroup.Item>
+                            )}
+
+                            {userInfo?.isAdmin && data?.isPaid && !data?.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button
+                                        type="button"
+                                        className="btn btn-block"
+                                        onClick={() => deliverHandler(data)}
+                                    >
+                                        Mark As Delivered
+                                    </Button>
                                 </ListGroup.Item>
                             )}
                             <ListGroup.Item>{error && <Message variant={"danger"}>{error}</Message>}</ListGroup.Item>
