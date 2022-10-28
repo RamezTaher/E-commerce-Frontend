@@ -20,7 +20,7 @@ const AdminAllOrders = () => {
 
     return (
         <>
-            <h1>Users</h1>
+            <h1>Orders</h1>
             {loading ? (
                 <Loader />
             ) : error ? (
@@ -30,40 +30,41 @@ const AdminAllOrders = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>ADMIN</th>
+                            <th>USER</th>
+                            <th>DATE</th>
+                            <th>TOTAL PRICE</th>
+                            <th>PAID</th>
+                            <th>DELIVERED</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((user, idx) => (
+                        {allOrders.map((order, idx) => (
                             <tr key={idx}>
-                                <td>{user?._id}</td>
-                                <td>{user?.name}</td>
+                                <td>{order?._id}</td>
+                                <td>{order?.user?.name}</td>
+                                <td>{order.createdAt.substring(0, 10)}</td>
+                                <td>${order.totalPrice}</td>
                                 <td>
-                                    <a href={`mailto:${user?.email}`}> {user?.email}</a>
-                                </td>
-                                <td>
-                                    {user?.isAdmin ? (
-                                        <i className="fas fa-check" style={{ color: "green" }}></i>
+                                    {order?.isPaid ? (
+                                        order.paidAt.substring(0, 10)
                                     ) : (
                                         <i className="fas fa-times" style={{ color: "red" }}></i>
                                     )}
                                 </td>
                                 <td>
-                                    <LinkContainer to={`/admin/users/${user._id}/modify`}>
+                                    {order?.isDelivered ? (
+                                        order.deliveredAt.substring(0, 10)
+                                    ) : (
+                                        <i className="fas fa-times" style={{ color: "red" }}></i>
+                                    )}
+                                </td>
+                                <td>
+                                    <LinkContainer to={`/admin/orders/${order._id}`}>
                                         <Button variant="light" className="btn-sm">
-                                            <i className="fas fa-edit"></i>
+                                            Details
                                         </Button>
                                     </LinkContainer>
-                                    <Button
-                                        variant="danger"
-                                        className="btn-sm"
-                                        onClick={() => deleteHandler(user?._id)}
-                                    >
-                                        <i className="fas fa-trash"></i>
-                                    </Button>
                                 </td>
                             </tr>
                         ))}
