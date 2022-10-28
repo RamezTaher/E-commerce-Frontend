@@ -19,6 +19,7 @@ import AdminModifyUser from "./pages/AdminModifyUser";
 import AdminAllProducts from "./pages/AdminAllProducts";
 import AdminModifyProduct from "./pages/AdminModifyProduct";
 import AdminAllOrders from "./pages/AdminAllOrders";
+import AuthProtectedRoute from "./utils/AuthProtectedRoute";
 
 // Still need to fix some protected routers
 
@@ -36,11 +37,13 @@ const App = () => {
                             <Route path="/admin/products/:id/modify" element={<AdminModifyProduct />} exact />
                             <Route path="/admin/orders" element={<AdminAllOrders />} exact />
                         </Route>
+                        <Route element={<AuthProtectedRoute />}>
+                            <Route path="/shipping" element={<Shipping />} exact />
+                            <Route path="/payment" element={<Payment />} exact />
+                            <Route path="/orders" element={<Orders />} exact />
+                            <Route path="/orders/:id" element={<Order />} exact />
+                        </Route>
 
-                        <Route path="/orders/:id" element={<Order />} />
-                        <Route path="/orders" element={<Orders />} />
-                        <Route path="/payment" element={<Payment />} />
-                        <Route path="/shipping" element={<Shipping />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/profile" element={<Profile />} />
