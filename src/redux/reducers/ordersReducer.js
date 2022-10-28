@@ -13,6 +13,9 @@ import {
     GET_ALLORDERS_REQUEST,
     GET_ALLORDERS_SUCCESS,
     RESET_ALLORDERS,
+    ADMIN_GET_ALLORDERS_REQUEST,
+    ADMIN_GET_ALLORDERS_SUCCESS,
+    ADMIN_GET_ALLORDERS_FAIL,
 } from "../../constants/orderConstants";
 
 export const createOrderReducer = (state = {}, action) => {
@@ -99,6 +102,27 @@ export const getAllOrdersReducer = (state = { allOrders: [] }, action) => {
             };
         case RESET_ALLORDERS:
             return { allOrders: [] };
+        default:
+            return state;
+    }
+};
+
+export const adminGetAllOrdersReducer = (state = { allOrders: [] }, action) => {
+    switch (action.type) {
+        case ADMIN_GET_ALLORDERS_REQUEST:
+            return {
+                loading: true,
+            };
+        case ADMIN_GET_ALLORDERS_SUCCESS:
+            return {
+                loading: false,
+                allOrders: action.payload,
+            };
+        case ADMIN_GET_ALLORDERS_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
         default:
             return state;
     }
