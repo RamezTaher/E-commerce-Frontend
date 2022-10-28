@@ -16,6 +16,9 @@ import {
     ADMIN_GET_ALLORDERS_REQUEST,
     ADMIN_GET_ALLORDERS_SUCCESS,
     ADMIN_GET_ALLORDERS_FAIL,
+    PUT_ORDER_DELIVER_SUCCESS,
+    PUT_ORDER_DELIVER_REQUEST,
+    PUT_ORDER_DELIVER_FAIL,
 } from "../../constants/orderConstants";
 
 export const createOrder = order => async (dispatch, getState) => {
@@ -163,6 +166,36 @@ export const adminGetAllOrders = () => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: ADMIN_GET_ALLORDERS_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        });
+    }
+};
+
+export const putDeliverOrder = order => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: PUT_ORDER_DELIVER_REQUEST,
+        });
+
+        const {
+            userLogin: { userInfo },
+        } = getState();
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${userInfo?.token}`,
+            },
+        };
+
+        const { data } = await axios.put(`${API_URL}/api/orders/${order._id}/deliver`, {}, config);
+
+        dispatch({
+            type: PUT_ORDER_DELIVER_SUCCESS,
+            payload: data,
+        });
+    } catch (error) {
+        dispatch({
+            type: PUT_ORDER_DELIVER_FAIL,
             payload: error.response && error.response.data.message ? error.response.data.message : error.message,
         });
     }
