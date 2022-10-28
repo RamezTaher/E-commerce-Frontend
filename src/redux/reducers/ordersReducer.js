@@ -16,6 +16,10 @@ import {
     ADMIN_GET_ALLORDERS_REQUEST,
     ADMIN_GET_ALLORDERS_SUCCESS,
     ADMIN_GET_ALLORDERS_FAIL,
+    PUT_ORDER_DELIVER_REQUEST,
+    PUT_ORDER_DELIVER_SUCCESS,
+    PUT_ORDER_DELIVER_FAIL,
+    RESET_ORDER_DELIVER,
 } from "../../constants/orderConstants";
 
 export const createOrderReducer = (state = {}, action) => {
@@ -78,6 +82,29 @@ export const putOrderReducer = (state = {}, action) => {
                 error: action.payload,
             };
         case RESET_ORDER:
+            return {};
+        default:
+            return state;
+    }
+};
+
+export const putOrderDeliverReducer = (state = {}, action) => {
+    switch (action.type) {
+        case PUT_ORDER_DELIVER_REQUEST:
+            return {
+                loading: true,
+            };
+        case PUT_ORDER_DELIVER_SUCCESS:
+            return {
+                loading: false,
+                success: true,
+            };
+        case PUT_ORDER_DELIVER_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            };
+        case RESET_ORDER_DELIVER:
             return {};
         default:
             return state;
