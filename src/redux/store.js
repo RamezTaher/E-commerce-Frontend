@@ -8,7 +8,7 @@ import { loginReducer, registerReducer } from "./reducers/authReducer";
 import { profileReducer, profileUpdateReducer } from "./reducers/profileReducer";
 import { shippingReducer } from "./reducers/shippingReducer";
 import { paymentReducer } from "./reducers/paymentReducer";
-import { createOrderReducer, getAllOrdersReducer, getOrderReducer, putOrderReducer } from "./reducers/ordersReducer";
+import { adminGetAllOrdersReducer, createOrderReducer, getAllOrdersReducer, getOrderReducer, putOrderReducer } from "./reducers/ordersReducer";
 import { deleteUserReducer, updateUserReducer, usersReducer } from "./reducers/usersReducer";
 
 const reducer = combineReducers({
@@ -28,6 +28,7 @@ const reducer = combineReducers({
     getOrder: getOrderReducer,
     putOrder: putOrderReducer,
     getAllOrders: getAllOrdersReducer,
+    adminGetOrders:adminGetAllOrdersReducer,
     users: usersReducer,
     deleteUser: deleteUserReducer,
     updateUser: updateUserReducer,
