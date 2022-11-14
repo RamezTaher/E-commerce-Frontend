@@ -1,4 +1,5 @@
 import axios from "axios";
+import { API_URL } from "../../constants/api";
 import { POST_REVIEW_FAIL, POST_REVIEW_REQUEST, POST_REVIEW_SUCCESS } from "../../constants/reviewConstants";
 
 export const postReview = (productId, review) => async (dispatch, getState) => {
