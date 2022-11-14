@@ -10,10 +10,15 @@ const Product = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
     const dispatch = useDispatch();
 
     const productDetails = useSelector(state => state.productDetails);
     const { loading, error, product: data } = productDetails;
+
+    const postReviewData = useSelector(state => state.postReview);
+    const { error: reviewError, success: reviewSuccess } = postReviewData;
 
     useEffect(() => {
         dispatch(product(id));
