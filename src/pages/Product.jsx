@@ -20,6 +20,9 @@ const Product = () => {
     const postReviewData = useSelector(state => state.postReview);
     const { error: reviewError, success: reviewSuccess } = postReviewData;
 
+    const userLogin = useSelector(state => state.userLogin);
+    const { userInfo } = userLogin;
+
     useEffect(() => {
         dispatch(product(id));
     }, [dispatch, id]);
@@ -40,75 +43,97 @@ const Product = () => {
             ) : error ? (
                 <Message variant="danger">{error}</Message>
             ) : (
-                <Row>
-                    <Col lg={6}>
-                        <Image src={data?.image} alt={data?.name} fluid />
-                    </Col>
-                    <Col lg={3}>
-                        <ListGroup variant="flush">
-                            <ListGroup.Item>
-                                <h2>{data?.name}</h2>
-                            </ListGroup.Item>
-                            <ListGroup.Item>
-                                <Rating value={data?.rating} text={`${data?.numReviews} reviews`} />
-                            </ListGroup.Item>
-                            <ListGroup.Item>Price: ${data?.price}</ListGroup.Item>
-                            <ListGroup.Item>Description: {data?.description}</ListGroup.Item>
-                        </ListGroup>
-                    </Col>
-                    <Col lg={3}>
-                        <Card>
+                <div className="">
+                    <Row>
+                        <Col lg={6}>
+                            <Image src={data?.image} alt={data?.name} fluid />
+                        </Col>
+                        <Col lg={3}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <Row>
-                                        <Col>Price:</Col>
-                                        <Col>
-                                            <strong>${data?.price}</strong>
-                                        </Col>
-                                    </Row>
+                                    <h2>{data?.name}</h2>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    <Row>
-                                        <Col>Status:</Col>
-                                        <Col>{data?.countInStock > 0 ? "In Stock" : "Out Of Stock"}</Col>
-                                    </Row>
+                                    <Rating value={data?.rating} text={`${data?.numReviews} reviews`} />
                                 </ListGroup.Item>
-
-                                {data?.countInStock > 0 && (
+                                <ListGroup.Item>Price: ${data?.price}</ListGroup.Item>
+                                <ListGroup.Item>Description: {data?.description}</ListGroup.Item>
+                            </ListGroup>
+                        </Col>
+                        <Col lg={3}>
+                            <Card>
+                                <ListGroup variant="flush">
                                     <ListGroup.Item>
                                         <Row>
-                                            <Col>Quantity</Col>
+                                            <Col>Price:</Col>
                                             <Col>
-                                                <Form.Control
-                                                    as="select"
-                                                    value={quantity}
-                                                    onChange={e => setQuantity(e.target.value)}
-                                                >
-                                                    {[...Array(data?.countInStock).keys()].map(x => (
-                                                        <option key={x + 1} value={x + 1}>
-                                                            {x + 1}
-                                                        </option>
-                                                    ))}
-                                                </Form.Control>
+                                                <strong>${data?.price}</strong>
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
-                                )}
+                                    <ListGroup.Item>
+                                        <Row>
+                                            <Col>Status:</Col>
+                                            <Col>{data?.countInStock > 0 ? "In Stock" : "Out Of Stock"}</Col>
+                                        </Row>
+                                    </ListGroup.Item>
 
+                                    {data?.countInStock > 0 && (
+                                        <ListGroup.Item>
+                                            <Row>
+                                                <Col>Quantity</Col>
+                                                <Col>
+                                                    <Form.Control
+                                                        as="select"
+                                                        value={quantity}
+                                                        onChange={e => setQuantity(e.target.value)}
+                                                    >
+                                                        {[...Array(data?.countInStock).keys()].map(x => (
+                                                            <option key={x + 1} value={x + 1}>
+                                                                {x + 1}
+                                                            </option>
+                                                        ))}
+                                                    </Form.Control>
+                                                </Col>
+                                            </Row>
+                                        </ListGroup.Item>
+                                    )}
+
+                                    <ListGroup.Item>
+                                        <Button
+                                            onClick={addToCart}
+                                            className="btn btn-block"
+                                            type="button"
+                                            disabled={data?.countInStock === 0}
+                                        >
+                                            Add To Cart
+                                        </Button>
+                                    </ListGroup.Item>
+                                </ListGroup>
+                            </Card>
+                        </Col>
+                    </Row>
+                    <Row className="mt-4">
+                        <Col lg={6}>
+                            <h2>Reviews</h2>
+                            {data?.reviews.length === 0 && <Message>No Reviews Yet.</Message>}
+                            <ListGroup variant="flush">
+                                {data?.reviews?.map((review, idx) => (
+                                    <ListGroup.Item key={idx}>
+                                        <span>{review.name}</span>
+                                        <Rating value={review?.rating} />
+                                        <p>{review.createdAt.substring(0, 10)}</p>
+                                        <p>{review.comment}</p>
+                                    </ListGroup.Item>
+                                ))}
                                 <ListGroup.Item>
-                                    <Button
-                                        onClick={addToCart}
-                                        className="btn btn-block"
-                                        type="button"
-                                        disabled={data?.countInStock === 0}
-                                    >
-                                        Add To Cart
-                                    </Button>
+                                    <h2>Leave a Review for us </h2>
+                                    {userInfo ? <></> : <Message>You need to be logged to leave a review</Message>}
                                 </ListGroup.Item>
                             </ListGroup>
-                        </Card>
-                    </Col>
-                </Row>
+                        </Col>
+                    </Row>
+                </div>
             )}
         </>
     );
