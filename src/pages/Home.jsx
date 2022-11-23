@@ -4,16 +4,20 @@ import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
 import { products } from "../redux/actions/productsActions";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+    const { keyword } = useParams();
     const dispatch = useDispatch();
     const productsList = useSelector(state => state.productsList);
+    console.log(keyword);
 
     useEffect(() => {
-        dispatch(products());
-    }, [dispatch]);
+        dispatch(products(keyword));
+    }, [dispatch, keyword]);
 
     return (
         <>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Form, Placeholder } from "react-bootstrap";
+import { useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -16,7 +17,7 @@ const Search = () => {
     };
     return (
         <>
-            <Form onSubmit={onSubmitHandler}>
+            <Form className="d-flex " onSubmit={onSubmitHandler}>
                 <Form.Control
                     type="text"
                     name="q"
@@ -24,7 +25,7 @@ const Search = () => {
                     placeholder="Search Products..."
                     className="mr-sm-2 ml-sm-5"
                 ></Form.Control>
-                <Button type="submit" variant="outline-success" className="p-2">
+                <Button type="submit" variant="outline-success" className="px-4 mx-1">
                     {" "}
                     Search{" "}
                 </Button>
