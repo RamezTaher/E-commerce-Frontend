@@ -4,11 +4,11 @@ import { PRODUCTS_FAIL, PRODUCTS_SUCCESS, PRODUCTS_REQUEST } from "../../constan
 import { API_URL } from "../../constants/api";
 
 export const products =
-    (keyword = "") =>
+    (keyword = "", pageNumber = "") =>
     async dispatch => {
         try {
             dispatch({ type: PRODUCTS_REQUEST });
-            const { data } = await axios.get(`${API_URL}/api/products?keyword=${keyword}`);
+            const { data } = await axios.get(`${API_URL}/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
             dispatch({
                 type: PRODUCTS_SUCCESS,
                 payload: data,

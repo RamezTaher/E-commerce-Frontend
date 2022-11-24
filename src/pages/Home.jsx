@@ -28,7 +28,7 @@ const Home = () => {
                 <Message variant="danger">productsList.error</Message>
             ) : (
                 <Row>
-                    {productsList?.data?.products?.map((product, idx) => (
+                    {productsList?.data?.map((product, idx) => (
                         <Col key={idx} sm={12} md={6} lg={4} xl={3} className="my-2">
                             <Link to={`/products/${product._id}`}>
                                 <Product product={product} />
