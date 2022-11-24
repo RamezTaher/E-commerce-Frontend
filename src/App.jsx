@@ -34,6 +34,7 @@ const App = () => {
                             <Route path="/admin/users" element={<AdminAllUsers />} exact />
                             <Route path="/admin/users/:id/modify" element={<AdminModifyUser />} exact />
                             <Route path="/admin/products/" element={<AdminAllProducts />} exact />
+                            <Route path="/admin/products/:pageNumber" element={<AdminAllProducts />} exact />
                             <Route path="/admin/products/:id/modify" element={<AdminModifyProduct />} exact />
                             <Route path="/admin/orders" element={<AdminAllOrders />} exact />
                         </Route>
