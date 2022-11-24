@@ -52,6 +52,8 @@ const App = () => {
                         <Route path="/cart/:id" element={<Cart />} />
                         <Route path="/cart/" element={<Cart />} />
                         <Route path="/search/:keyword" element={<Home />} />
+                        <Route path="/search/:keyword/page/:pageNumber" element={<Home />} />
+                        <Route path="/page/:pageNumber" element={<Home />} />
                         <Route path="/" element={<Home />} exact />
                     </Routes>
                 </Container>
