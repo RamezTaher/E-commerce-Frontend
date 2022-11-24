@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 import { products } from "../redux/actions/productsActions";
 import { Link } from "react-router-dom";
+import Paginator from "../components/Paginator";
 
 const Home = () => {
     const { keyword, pageNumber } = useParams();
@@ -27,15 +28,18 @@ const Home = () => {
             ) : productsList.error ? (
                 <Message variant="danger">productsList.error</Message>
             ) : (
-                <Row>
-                    {productsList?.data?.map((product, idx) => (
-                        <Col key={idx} sm={12} md={6} lg={4} xl={3} className="my-2">
-                            <Link to={`/products/${product._id}`}>
-                                <Product product={product} />
-                            </Link>
-                        </Col>
-                    ))}
-                </Row>
+                <>
+                    <Row>
+                        {productsList?.data?.map((product, idx) => (
+                            <Col key={idx} sm={12} md={6} lg={4} xl={3} className="my-2">
+                                <Link to={`/products/${product._id}`}>
+                                    <Product product={product} />
+                                </Link>
+                            </Col>
+                        ))}
+                    </Row>
+                    <Paginator pages={productsList?.pages} page={productsList?.page} keyword={keyword ? keyword : ""} />
+                </>
             )}
         </>
     );
