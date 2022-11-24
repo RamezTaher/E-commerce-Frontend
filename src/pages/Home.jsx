@@ -10,14 +10,14 @@ import { products } from "../redux/actions/productsActions";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-    const { keyword } = useParams();
+    const { keyword, pageNumber } = useParams();
     const dispatch = useDispatch();
     const productsList = useSelector(state => state.productsList);
-    console.log(keyword);
+    console.log(pageNumber);
 
     useEffect(() => {
-        dispatch(products(keyword));
-    }, [dispatch, keyword]);
+        dispatch(products(keyword, pageNumber));
+    }, [dispatch, keyword, pageNumber]);
 
     return (
         <>
