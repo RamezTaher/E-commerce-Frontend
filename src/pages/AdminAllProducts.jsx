@@ -79,7 +79,7 @@ const AdminAllProducts = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {data?.products?.map((product, idx) => (
+                        {data?.map((product, idx) => (
                             <tr key={idx}>
                                 <td>{product?._id}</td>
                                 <td>{product?.name}</td>
