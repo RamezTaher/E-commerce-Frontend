@@ -1,1 +1,1 @@
-export const API_URL = "https://backend-by-ramez.herokuapp.com"
+export const API_URL = "https://e-commerce-tktv.onrender.com"
